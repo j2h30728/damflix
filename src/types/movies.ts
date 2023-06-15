@@ -14,3 +14,16 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
+
+export interface GetMoviesResponseData {
+  page: number;
+  results: Array<Movie>;
+  total_pages: number;
+  total_results: number;
+}
+
+export interface GetResponse<T> {
+  data: T;
+  status: number;
+  statusText: string;
+}

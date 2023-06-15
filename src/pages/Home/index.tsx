@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-import { useQueryPopularMovies } from "../queries/movies";
-import ROUTE_PATH from "../router/ROUTE_PATH";
+import ROUTE_PATH from "../../router/ROUTE_PATH";
+import { GetMoviesResponseData, GetResponse } from "../../types/movies";
 
 const Home = () => {
-  const test = useQueryPopularMovies();
+  const test = useLoaderData() as GetResponse<GetMoviesResponseData>;
   console.log(test);
   return (
     <>
