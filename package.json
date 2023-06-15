@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+    "format": "prettier --cache --write '**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.12",
@@ -35,5 +37,11 @@
     "lint-staged": "^13.2.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "npm run commit-msg"
+    }
   }
 }
