@@ -6,7 +6,7 @@ import { RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import router from "./router/index.tsx";
-import queryClient from "./utils/queryConfig.ts";
+import queryClient from "./utils/queryClient.ts";
 
 console.log(firebase);
 
