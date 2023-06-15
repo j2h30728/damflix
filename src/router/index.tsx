@@ -1,25 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import App from "../App";
 import { ComingSoon, Home, NowPlaying } from "../pages";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
     children: [
       {
-        path: "",
         element: <Home />,
+        path: "",
       },
       {
-        path: "coming-soon",
         element: <ComingSoon />,
+        path: "coming-soon",
       },
       {
-        path: "now-playing",
         element: <NowPlaying />,
+        path: "now-playing",
       },
     ],
+    element: <App />,
+    path: "/",
   },
 ]);
 

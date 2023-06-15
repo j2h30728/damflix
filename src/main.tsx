@@ -1,8 +1,9 @@
+import firebase from "firebase/compat/app";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import firebase from "firebase/compat/app";
 import { RouterProvider } from "react-router-dom";
+
+import "./index.css";
 import router from "./router/index.tsx";
 
 console.log(firebase);
