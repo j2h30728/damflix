@@ -1,24 +1,43 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import styled from "styled-components";
 
-import ROUTE_PATH from "../../router/ROUTE_PATH";
 import { GetMoviesResponseData, GetResponse } from "../../types/movies";
+import { ImageFormat, makeImagePath } from "../../utils/makeImagePath";
 
 const Home = () => {
-  const test = useLoaderData() as GetResponse<GetMoviesResponseData>;
-  console.log(test);
+  const {
+    data: { results: popularMovies },
+  } = useLoaderData() as GetResponse<GetMoviesResponseData>;
+  console.log(popularMovies);
+
   return (
     <>
-      <h2>Home</h2>
-      <nav>
-        <div>
-          <Link to={ROUTE_PATH.COMING_SOON}>ROUTE_PATH.COMING_SOON</Link>
-        </div>
-        <div>
-          <Link to={ROUTE_PATH.NOW_PLAYING}>ROUTE_PATH.NOW_PLAYING</Link>
-        </div>
-      </nav>
+      <h2>Popular</h2>
+      {popularMovies.map(movie => (
+        <MovieContainer key={movie.id}>
+          <MovieImage
+            imagePath={makeImagePath(
+              movie.poster_path,
+              ImageFormat.W500
+            )}></MovieImage>
+          <p>{movie.title}</p>
+        </MovieContainer>
+      ))}
     </>
   );
 };
 
 export default Home;
+
+const MovieContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MovieImage = styled.div<{ imagePath: string }>`
+  width: 300px;
+  height: 500px;
+  background-image: url(${props => props.imagePath});
+  background-size: cover;
+  background-position: center center;
+`;
