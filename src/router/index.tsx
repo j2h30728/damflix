@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "../App";
-import { ComingSoon, Home, NowPlaying } from "../pages";
+import { Home, NowPlaying, Upcoming } from "../pages";
 import ErrorPage from "../pages/ErrorPage";
 import ROUTE_PATH from "./ROUTE_PATH";
 
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         path: "",
       },
       {
-        element: <ComingSoon />,
+        element: <Upcoming />,
         path: ROUTE_PATH.COMING_SOON,
       },
       {
