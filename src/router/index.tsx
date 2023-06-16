@@ -1,17 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
-import App from "../App";
-import {
-  Home,
-  NowPlaying,
-  Upcoming,
-  homeLoader,
-  nowPlayingLoader,
-  upcominggLoader,
-} from "../pages";
-import ErrorPage from "../pages/ErrorPage";
-import queryClient from "../utils/queryClient";
-import ROUTE_PATH from "./ROUTE_PATH";
+import App from '../App';
+import { Home, NowPlaying, Upcoming, homeLoader, nowPlayingLoader, upcominggLoader } from '../pages';
+import ErrorPage from '../pages/ErrorPage';
+import queryClient from '../utils/queryClient';
+import ROUTE_PATH from './ROUTE_PATH';
 
 const router = createBrowserRouter([
   {

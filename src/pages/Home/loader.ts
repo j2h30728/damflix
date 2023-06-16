@@ -1,8 +1,8 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient } from '@tanstack/react-query';
 
-import { GetMoviesResponseData, GetResponse } from "../../types/movies";
+import { GetMoviesResponseData, GetResponse } from '../../types/movies';
 
-export const queryKey = ["movie", "popular"];
+export const queryKey = ['movie', 'popular'];
 
 export const loader = (queryClient: QueryClient) => async () => {
   return (
