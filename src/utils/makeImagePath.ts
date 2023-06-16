@@ -8,5 +8,5 @@ export const ImageFormat = {
 type ImageFormat = 'original' | 'w500';
 
 export function makeImagePath(imagePath: string, format: ImageFormat) {
-  return `${IMAGE_BASE_URL}${format}/${imagePath}`;
+  if (imagePath) return `${IMAGE_BASE_URL}${format}/${imagePath}`;
 }

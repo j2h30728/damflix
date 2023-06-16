@@ -1,24 +1,43 @@
-import { useLoaderData } from 'react-router-dom';
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { GetMoviesResponseData, GetResponse } from '../../types/movies';
+import Modal from '../../components/Modal';
+import { ModalControlContext } from '../../contexts/ModalControlContext';
+import { useQueryMovieDetailData, useQueryUpComingMoviesData } from '../../queries/movies';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
 
 const Upcoming = () => {
-  const {
-    data: { results: upcomingMovies },
-  } = useLoaderData() as GetResponse<GetMoviesResponseData>;
+  const { data: nowPlayingMoviesData } = useQueryUpComingMoviesData();
+  const { movieId } = useParams();
+  const { data: movieDetailData } = useQueryMovieDetailData(movieId);
 
+  const { handleCloseModal, handleMovieClick, isOpenModal } = useContext(ModalControlContext);
   return (
     <>
       <MoviesWrapper>
-        {upcomingMovies.map(movie => (
-          <MovieContainer key={movie.id} to={`movie/${movie.id}`}>
+        {nowPlayingMoviesData?.results?.map(movie => (
+          <MovieContainer key={movie.id} onClick={handleMovieClick} to={`/movie/${movie.id}`}>
             <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>
         ))}
       </MoviesWrapper>
+
+      <Modal isOpen={isOpenModal} onClose={handleCloseModal}>
+        <MoviesWrapper>
+          <MovieImage
+            imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
+          ></MovieImage>
+          <h2>{movieDetailData?.original_title}</h2>
+          <p>{movieDetailData?.overview}</p>
+          <p>Budget: ${movieDetailData?.budget}</p>
+          <p>Revenue: ${movieDetailData?.revenue}</p>
+          <p>Runtime: {movieDetailData?.runtime}minutes</p>
+          <p>Rating: {movieDetailData?.vote_average}</p>
+          <p>Homepage: {movieDetailData?.homepage}</p>
+        </MoviesWrapper>
+      </Modal>
     </>
   );
 };

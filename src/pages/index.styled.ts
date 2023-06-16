@@ -11,7 +11,7 @@ export const MovieContainer = styled(Link)`
   flex-direction: column;
 `;
 
-export const MovieImage = styled.div<{ imagePath: string }>`
+export const MovieImage = styled.div<{ imagePath?: string }>`
   width: 300px;
   height: 500px;
   background-image: url(${props => props.imagePath});
