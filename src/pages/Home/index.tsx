@@ -8,12 +8,12 @@ const Home = () => {
   const {
     data: { results: popularMovies },
   } = useLoaderData() as GetResponse<GetMoviesResponseData>;
-
+  console.log(popularMovies);
   return (
     <>
       <MoviesWrapper>
         {popularMovies.map(movie => (
-          <MovieContainer key={movie.id}>
+          <MovieContainer key={movie.id} to={`movie/${movie.id}`}>
             <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>

@@ -1,7 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
-import { Home, NowPlaying, Upcoming, homeLoader, nowPlayingLoader, upcominggLoader } from '../pages';
+import {
+  Home,
+  MovieDetail,
+  NowPlaying,
+  Upcoming,
+  homeLoader,
+  movieDetailLoader,
+  nowPlayingLoader,
+  upcominggLoader,
+} from '../pages';
 import ErrorPage from '../pages/ErrorPage';
 import queryClient from '../utils/queryClient';
 import ROUTE_PATH from './ROUTE_PATH';
@@ -25,6 +34,11 @@ const router = createBrowserRouter([
         loader: nowPlayingLoader(queryClient),
 
         path: ROUTE_PATH.NOW_PLAYING,
+      },
+      {
+        element: <MovieDetail />,
+        loader: movieDetailLoader(queryClient),
+        path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
       },
     ],
     element: <App />,

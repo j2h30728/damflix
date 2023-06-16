@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const MoviesWrapper = styled.div`
@@ -5,7 +6,7 @@ export const MoviesWrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-export const MovieContainer = styled.div`
+export const MovieContainer = styled(Link)`
   display: flex;
   flex-direction: column;
 `;
