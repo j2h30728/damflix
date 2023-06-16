@@ -13,7 +13,7 @@ const Upcoming = () => {
     <>
       <MoviesWrapper>
         {upcomingMovies.map(movie => (
-          <MovieContainer key={movie.id}>
+          <MovieContainer key={movie.id} to={`movie/${movie.id}`}>
             <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>

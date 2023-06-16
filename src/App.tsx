@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Header } from './components';
-import { DarkModeContext } from './contexts/darkModeContext';
+import { DarkModeContext } from './contexts/DarkModeContext';
 import GlobalStyle from './styles/GlobalStyle';
 import { darkTheme, lightTheme } from './styles/theme';
 
