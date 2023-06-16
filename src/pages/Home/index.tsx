@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Modal from '../../components/Modal';
+import { ModalControlContext } from '../../contexts/ModalControlContext';
 import { useQueryMovieDetailData, useQueryMoviesData } from '../../queries/movies';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
@@ -11,16 +12,7 @@ const Home = () => {
   const { movieId } = useParams();
   const { data: movieDetailData } = useQueryMovieDetailData(movieId);
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const navigate = useNavigate();
-  const handleMovieClick = () => {
-    setIsOpenModal(true);
-  };
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-    navigate(-1);
-  };
-
+  const { handleCloseModal, handleMovieClick, isOpenModal } = useContext(ModalControlContext);
   return (
     <>
       <MoviesWrapper>
