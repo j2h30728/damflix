@@ -31,9 +31,9 @@ const Home = () => {
 
       <Modal isOpen={isOpenModal} onClose={handleCloseModal}>
         <MovieWrapper>
-          <MovieDeatilImage
+          <MovieDetailImage
             imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
-          ></MovieDeatilImage>
+          ></MovieDetailImage>
           <MovieContents>
             <h2>{movieDetailData?.original_title}</h2>
             <p>{movieDetailData?.overview}</p>
@@ -59,7 +59,7 @@ const MovieWrapper = styled.div`
 
 const MovieContents = styled.div``;
 
-const MovieDeatilImage = styled.div<{ imagePath?: string }>`
+const MovieDetailImage = styled.div<{ imagePath?: string }>`
   width: 100%;
   height: 50%;
   background-image: url(${props => props.imagePath});
