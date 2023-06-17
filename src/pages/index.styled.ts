@@ -1,13 +1,14 @@
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const MoviesWrapper = styled.div`
+export const MoviesWrapper = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 `;
 
-export const MovieContainer = styled(Link)`
+export const MovieContainer = styled(motion(Link))`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -28,6 +29,7 @@ export const MovieImage = styled.div<{ imagePath?: string }>`
 export const MovieTitle = styled.h3`
   font-size: 1.3rem;
   font-family: 'EF_jejudoldam';
+  height: 30px;
 `;
 export const MovieWrapper = styled.div`
   display: flex;

@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import { useMatch, useParams } from 'react-router-dom';
 
 import useControlModal from '../../../hooks/useControlModal';
@@ -28,16 +29,24 @@ const Upcoming = () => {
   useCheckModalOnOff(!!isListPagePathnameMatch);
   return (
     <>
-      <MoviesWrapper>
-        {nowPlayingMoviesData?.results?.map(movie => (
-          <MovieContainer key={movie.id} onClick={() => handleOpenMovie(isFetched)} to={`${movie.id}`}>
-            <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
-            <MovieTitle>{movie.title}</MovieTitle>
-          </MovieContainer>
-        ))}
-      </MoviesWrapper>
+      <AnimatePresence>
+        <MoviesWrapper animate="visible" initial="hidden" variants={containerVariants}>
+          {nowPlayingMoviesData?.results?.map(movie => (
+            <MovieContainer
+              key={movie.id}
+              layoutId={`${movie.id}`}
+              onClick={() => handleOpenMovie(isFetched)}
+              to={`${movie.id}`}
+              variants={itemVariants}
+            >
+              <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
+              <MovieTitle>{movie.title}</MovieTitle>
+            </MovieContainer>
+          ))}
+        </MoviesWrapper>
+      </AnimatePresence>
 
-      <Modal isOpen={isOpenModal} onClose={handleCloseModal}>
+      <Modal isOpen={isOpenModal} layoutId={`${movieDetailData?.id}`} onClose={handleCloseModal}>
         <MovieWrapper>
           <MovieDetailImage
             imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
@@ -58,3 +67,21 @@ const Upcoming = () => {
 };
 
 export default Upcoming;
+const containerVariants = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
