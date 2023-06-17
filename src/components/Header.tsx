@@ -13,7 +13,7 @@ const Header = () => {
       <Logo>DAMFLIX</Logo>
       <LinkContainer>
         <Link to={ROUTE_PATH.HOME}>POPULAR</Link>
-        <Link to={ROUTE_PATH.COMING_SOON}>OMING SOON</Link>
+        <Link to={ROUTE_PATH.COMING_SOON}>COMING SOON</Link>
         <Link to={ROUTE_PATH.NOW_PLAYING}>NOW PLAYING</Link>
       </LinkContainer>
       <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>

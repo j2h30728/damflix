@@ -7,4 +7,4 @@ export { default as NowPlaying } from './NowPlaying';
 export { loader as nowPlayingLoader } from './NowPlaying/loader';
 
 export { default as Upcoming } from './Upcoming';
-export { loader as upcominggLoader } from './Upcoming/loader';
+export { loader as upcomingLoader } from './Upcoming/loader';
