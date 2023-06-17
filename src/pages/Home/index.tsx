@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Modal from '../../components/Modal';
 import { ModalControlContext } from '../../contexts/ModalControlContext';
@@ -25,21 +26,39 @@ const Home = () => {
       </MoviesWrapper>
 
       <Modal isOpen={isOpenModal} onClose={handleCloseModal}>
-        <MoviesWrapper>
-          <MovieImage
+        <MovieWrapper>
+          <MovieDeatilImage
             imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
-          ></MovieImage>
-          <h2>{movieDetailData?.original_title}</h2>
-          <p>{movieDetailData?.overview}</p>
-          <p>Budget: ${movieDetailData?.budget}</p>
-          <p>Revenue: ${movieDetailData?.revenue}</p>
-          <p>Runtime: {movieDetailData?.runtime}minutes</p>
-          <p>Rating: {movieDetailData?.vote_average}</p>
-          <p>Homepage: {movieDetailData?.homepage}</p>
-        </MoviesWrapper>
+          ></MovieDeatilImage>
+          <MovieContents>
+            <h2>{movieDetailData?.original_title}</h2>
+            <p>{movieDetailData?.overview}</p>
+            <p>Budget: ${movieDetailData?.budget}</p>
+            <p>Revenue: ${movieDetailData?.revenue}</p>
+            <p>Runtime: {movieDetailData?.runtime}minutes</p>
+            <p>Rating: {movieDetailData?.vote_average}</p>
+            <p>Homepage: {movieDetailData?.homepage}</p>
+          </MovieContents>
+        </MovieWrapper>
       </Modal>
     </>
   );
 };
 
 export default Home;
+
+const MovieWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const MovieContents = styled.div``;
+
+const MovieDeatilImage = styled.div<{ imagePath?: string }>`
+  width: 100%;
+  height: 50%;
+  background-image: url(${props => props.imagePath});
+  background-size: cover;
+  background-position: center center;
+`;

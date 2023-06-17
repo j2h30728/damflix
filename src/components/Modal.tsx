@@ -34,6 +34,7 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
 
 const ModalContent = styled.div`
   background-color: ${props => props.theme.color.background};
-  padding: 20px;
-  border-radius: 4px;
+  border-radius: 10px;
+  width: 70%;
+  height: 80%;
 `;

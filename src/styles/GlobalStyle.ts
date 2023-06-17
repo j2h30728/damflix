@@ -18,7 +18,7 @@ p {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: 'Chewy', cursive, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'KOTRA_BOLD-Bold','Pretendard-Regular','Chewy', cursive, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 body {
   line-height: 1;
