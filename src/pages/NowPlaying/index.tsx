@@ -6,7 +6,16 @@ import { ModalControlContext } from '../../contexts/ModalControlContext';
 import { useQueryMovieDetailData, useQueryNowPlayingMoviesData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
-import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
+import {
+  MovieContainer,
+  MovieContents,
+  MovieDetailImage,
+  MovieDetailTitle,
+  MovieImage,
+  MovieTitle,
+  MovieWrapper,
+  MoviesWrapper,
+} from '../index.styled';
 
 const NowPlaying = () => {
   const { data: nowPlayingMoviesData } = useQueryNowPlayingMoviesData();
@@ -29,18 +38,20 @@ const NowPlaying = () => {
       </MoviesWrapper>
 
       <Modal isOpen={isOpenModal} onClose={handleCloseModal}>
-        <MoviesWrapper>
-          <MovieImage
+        <MovieWrapper>
+          <MovieDetailImage
             imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
-          ></MovieImage>
-          <h2>{movieDetailData?.original_title}</h2>
-          <p>{movieDetailData?.overview}</p>
-          <p>Budget: ${movieDetailData?.budget}</p>
-          <p>Revenue: ${movieDetailData?.revenue}</p>
-          <p>Runtime: {movieDetailData?.runtime}minutes</p>
-          <p>Rating: {movieDetailData?.vote_average}</p>
-          <p>Homepage: {movieDetailData?.homepage}</p>
-        </MoviesWrapper>
+          ></MovieDetailImage>
+          <MovieContents>
+            <MovieDetailTitle>{movieDetailData?.original_title}</MovieDetailTitle>
+            <p>{movieDetailData?.overview}</p>
+            <p>Budget: ${movieDetailData?.budget}</p>
+            <p>Revenue: ${movieDetailData?.revenue}</p>
+            <p>Runtime: {movieDetailData?.runtime}minutes</p>
+            <p>Rating: {movieDetailData?.vote_average}</p>
+            <p>Homepage: {movieDetailData?.homepage}</p>
+          </MovieContents>
+        </MovieWrapper>
       </Modal>
     </>
   );

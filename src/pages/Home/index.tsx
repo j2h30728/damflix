@@ -1,13 +1,21 @@
 import { useContext } from 'react';
 import { useMatch, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
 import Modal from '../../components/Modal';
 import { ModalControlContext } from '../../contexts/ModalControlContext';
 import { useQueryMovieDetailData, useQueryMoviesData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
-import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
+import {
+  MovieContainer,
+  MovieContents,
+  MovieDetailImage,
+  MovieDetailTitle,
+  MovieImage,
+  MovieTitle,
+  MovieWrapper,
+  MoviesWrapper,
+} from '../index.styled';
 
 const Home = () => {
   const { data: popularMoviesData } = useQueryMoviesData();
@@ -35,7 +43,7 @@ const Home = () => {
             imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
           ></MovieDetailImage>
           <MovieContents>
-            <h2>{movieDetailData?.original_title}</h2>
+            <MovieDetailTitle>{movieDetailData?.original_title}</MovieDetailTitle>
             <p>{movieDetailData?.overview}</p>
             <p>Budget: ${movieDetailData?.budget}</p>
             <p>Revenue: ${movieDetailData?.revenue}</p>
@@ -50,19 +58,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const MovieWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const MovieContents = styled.div``;
-
-const MovieDetailImage = styled.div<{ imagePath?: string }>`
-  width: 100%;
-  height: 50%;
-  background-image: url(${props => props.imagePath});
-  background-size: cover;
-  background-position: center center;
-`;
