@@ -24,22 +24,32 @@ const Header = () => {
 export default Header;
 
 const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   position: fixed;
   top: 0;
   width: 100%;
-  height: 80px;
+  height: 85px;
   background-color: ${props => props.theme.color.secondary};
 `;
 const Logo = styled.div`
   color: ${props => props.theme.color.point};
-  font-size: 50px;
+  font-size: 40px;
+  font-family: 'EF_jejudoldam';
+  letter-spacing: -5px;
+  text-shadow: -2px -2px 0 ${props => props.theme.color.primary}, 2px -2px 0 ${props => props.theme.color.primary},
+    -2px 2px 0 ${props => props.theme.color.primary}, 2px 2px 0 ${props => props.theme.color.primary};
 `;
 
 const DarkModeButton = styled.button`
-  background-color: ${props => props.theme.color.background};
+  border: 0;
+  padding: 10px;
+  border-radius: 50%;
+  width: fit-content;
+  justify-self: end;
+  margin-right: 30px;
+  background-color: ${props => props.theme.color.neutral};
   color: ${props => props.theme.color.text};
 `;
 

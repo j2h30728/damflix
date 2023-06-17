@@ -6,11 +6,11 @@ interface DarkModeContextType {
 }
 
 export const DarkModeContext = createContext<DarkModeContextType>({
-  isDark: false,
+  isDark: true,
 });
 
 export const DarkModeContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const handleChangeDarkMode = () => setIsDark(prev => !prev);
 
   return <DarkModeContext.Provider value={{ handleChangeDarkMode, isDark }}>{children}</DarkModeContext.Provider>;
