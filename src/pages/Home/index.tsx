@@ -10,19 +10,19 @@ import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
 
 const Home = () => {
-  const isListPagePathnameMatch = useMatch(ROUTE_PATH.HOME);
   const { data: popularMoviesData } = useQueryMoviesData();
 
   const { movieId } = useParams();
-  const { data: movieDetailData } = useQueryMovieDetailData(movieId);
+  const { data: movieDetailData, isFetched } = useQueryMovieDetailData(movieId);
 
   const { handleCloseModal, handleOpenMovie, isOpenModal, useCheckModalOnOff } = useContext(ModalControlContext);
+  const isListPagePathnameMatch = useMatch(ROUTE_PATH.HOME);
   useCheckModalOnOff(!!isListPagePathnameMatch);
   return (
     <>
       <MoviesWrapper>
         {popularMoviesData?.results?.map(movie => (
-          <MovieContainer key={movie.id} onClick={handleOpenMovie} to={`${movie.id}`}>
+          <MovieContainer key={movie.id} onClick={() => handleOpenMovie(isFetched)} to={`${movie.id}`}>
             <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>

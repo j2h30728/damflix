@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 interface ModalControlContextType {
   handleCloseModal: () => void;
-  handleOpenMovie: () => void;
+  handleOpenMovie: (isFetched: boolean) => void;
   isOpenModal: boolean;
   useCheckModalOnOff: (isListPagePathnameMatch: boolean) => void;
 }
 
 export const ModalControlContext = createContext<ModalControlContextType>({
   handleCloseModal: () => {},
-  handleOpenMovie: () => {},
+  handleOpenMovie: isFetched => {
+    isFetched;
+  },
   isOpenModal: false,
   useCheckModalOnOff: isListPagePathnameMatch => {
     isListPagePathnameMatch;
@@ -22,8 +24,8 @@ export const ModalControlContextProvider = ({ children }: { children: React.Reac
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const navigate = useNavigate();
-  const handleOpenMovie = () => {
-    setIsOpenModal(true);
+  const handleOpenMovie = (isFetched: boolean) => {
+    if (isFetched) setIsOpenModal(true);
   };
   const handleCloseModal = () => {
     setIsOpenModal(false);

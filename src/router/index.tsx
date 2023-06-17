@@ -16,6 +16,7 @@ const router = createBrowserRouter([
       },
       {
         element: <Home />,
+        loader: movieDetailLoader(queryClient),
         path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
       },
       {
