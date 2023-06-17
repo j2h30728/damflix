@@ -16,7 +16,6 @@ const router = createBrowserRouter([
       },
       {
         element: <Home />,
-        loader: movieDetailLoader(queryClient),
         path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
       },
       {
@@ -25,9 +24,19 @@ const router = createBrowserRouter([
         path: ROUTE_PATH.COMING_SOON,
       },
       {
+        element: <Upcoming />,
+        loader: movieDetailLoader(queryClient),
+        path: `${ROUTE_PATH.COMING_SOON}${ROUTE_PATH.MOVIE_DETAIL_PAGE}`,
+      },
+      {
         element: <NowPlaying />,
         loader: nowPlayingLoader(queryClient),
         path: ROUTE_PATH.NOW_PLAYING,
+      },
+      {
+        element: <NowPlaying />,
+        loader: movieDetailLoader(queryClient),
+        path: `${ROUTE_PATH.NOW_PLAYING}${ROUTE_PATH.MOVIE_DETAIL_PAGE}`,
       },
     ],
     element: <App />,

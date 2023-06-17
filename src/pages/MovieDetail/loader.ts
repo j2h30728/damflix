@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from 'react-router-dom';
 
 import { QueryClient } from '@tanstack/react-query';
 
-export const getQueryKey = (movieId: string) => ['movie', movieId];
+export const getQueryKey = (movieId: string) => ['movie', `${movieId}?language=ko`];
 
 export const loader =
   (queryClient: QueryClient) =>

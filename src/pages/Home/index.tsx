@@ -1,24 +1,28 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useMatch, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Modal from '../../components/Modal';
 import { ModalControlContext } from '../../contexts/ModalControlContext';
 import { useQueryMovieDetailData, useQueryMoviesData } from '../../queries/movies';
+import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
 
 const Home = () => {
+  const isListPagePathnameMatch = useMatch(ROUTE_PATH.HOME);
   const { data: popularMoviesData } = useQueryMoviesData();
+
   const { movieId } = useParams();
   const { data: movieDetailData } = useQueryMovieDetailData(movieId);
 
-  const { handleCloseModal, handleMovieClick, isOpenModal } = useContext(ModalControlContext);
+  const { handleCloseModal, handleOpenMovie, isOpenModal, useCheckModalOnOff } = useContext(ModalControlContext);
+  useCheckModalOnOff(!!isListPagePathnameMatch);
   return (
     <>
       <MoviesWrapper>
         {popularMoviesData?.results?.map(movie => (
-          <MovieContainer key={movie.id} onClick={handleMovieClick} to={`movie/${movie.id}`}>
+          <MovieContainer key={movie.id} onClick={handleOpenMovie} to={`${movie.id}`}>
             <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>
