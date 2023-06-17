@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import { useMatch, useParams } from 'react-router-dom';
 
+import useControlModal from '../../../hooks/useControlModal';
 import Modal from '../../components/Modal';
-import { ModalControlContext } from '../../contexts/ModalControlContext';
 import { useQueryMovieDetailData, useQueryUpComingMoviesData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
@@ -23,7 +22,7 @@ const Upcoming = () => {
   const { movieId } = useParams();
   const { data: movieDetailData, isFetched } = useQueryMovieDetailData(movieId);
 
-  const { handleCloseModal, handleOpenMovie, isOpenModal, useCheckModalOnOff } = useContext(ModalControlContext);
+  const { handleCloseModal, handleOpenMovie, isOpenModal, useCheckModalOnOff } = useControlModal();
 
   const isListPagePathnameMatch = useMatch(ROUTE_PATH.COMING_SOON);
   useCheckModalOnOff(!!isListPagePathnameMatch);

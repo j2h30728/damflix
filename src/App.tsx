@@ -4,7 +4,6 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { Header } from './components';
 import { DarkModeContext } from './contexts/DarkModeContext';
-import { ModalControlContextProvider } from './contexts/ModalControlContext';
 import GlobalStyle from './styles/GlobalStyle';
 import { darkTheme, lightTheme } from './styles/theme';
 
@@ -12,15 +11,13 @@ function App() {
   const { isDark } = useContext(DarkModeContext);
 
   return (
-    <ModalControlContextProvider>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <GlobalStyle />
-        <Layout>
-          <Header />
-          <Outlet />
-        </Layout>
-      </ThemeProvider>
-    </ModalControlContextProvider>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Layout>
+        <Header />
+        <Outlet />
+      </Layout>
+    </ThemeProvider>
   );
 }
 
