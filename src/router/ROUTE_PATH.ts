@@ -1,8 +1,7 @@
 const ROUTE_PATH = {
-  COMING_SOON: 'coming-soon',
   HOME: '',
-  MOVIE_DETAIL_PAGE: ':movieId',
-  NOW_PLAYING: 'now-playing',
+  LIST_TYPE: ':listType',
+  MOVIE_DETAIL_PAGE: 'movie/:movieId',
   ROOT: '/',
 } as const;
 

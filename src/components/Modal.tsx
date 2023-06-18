@@ -9,26 +9,23 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal = ({ children, isOpen, layoutId, onClose }: ModalProps) => {
+const Modal = ({ children, layoutId, onClose }: ModalProps) => {
   const modalRoot = document.querySelector('#modal-root');
 
   if (!modalRoot) return null;
   return ReactDOM.createPortal(
     <AnimatePresence>
-      {isOpen && (
-        <ModalOverlay onClick={onClose}>
-          <ModalContent
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            initial={{ opacity: 0, y: 20 }}
-            layoutId={layoutId}
-            onClick={e => e.stopPropagation()}
-            transition={{ duration: 0.3 }}
-          >
-            {children}
-          </ModalContent>
-        </ModalOverlay>
-      )}
+      <ModalOverlay onClick={onClose}>
+        <ModalContent
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 0 }}
+          initial={{ opacity: 0, y: 0 }}
+          layoutId={layoutId}
+          onClick={e => e.stopPropagation()}
+        >
+          {children}
+        </ModalContent>
+      </ModalOverlay>
     </AnimatePresence>,
     modalRoot
   );

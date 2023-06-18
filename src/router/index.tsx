@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
-import { Home, NowPlaying, Upcoming, homeLoader, movieDetailLoader, nowPlayingLoader, upcomingLoader } from '../pages';
+import { MovieList, movieDetailLoader, movieListLoader } from '../pages';
 import ErrorPage from '../pages/ErrorPage';
+import MovieDetail from '../pages/MovieDetail';
 import queryClient from '../utils/queryClient';
 import ROUTE_PATH from './ROUTE_PATH';
 
@@ -12,38 +13,26 @@ const router = createBrowserRouter([
       {
         children: [
           {
-            element: <Home />,
+            element: <MovieDetail />,
             loader: movieDetailLoader(queryClient),
             path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
           },
         ],
-        element: <Home />,
-        loader: homeLoader(queryClient),
-        path: ROUTE_PATH.HOME,
+        element: <MovieList />,
+        loader: movieListLoader(queryClient),
+        path: '',
       },
       {
         children: [
           {
-            element: <Upcoming />,
+            element: <MovieDetail />,
             loader: movieDetailLoader(queryClient),
             path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
           },
         ],
-        element: <Upcoming />,
-        loader: upcomingLoader(queryClient),
-        path: ROUTE_PATH.COMING_SOON,
-      },
-      {
-        children: [
-          {
-            element: <NowPlaying />,
-            loader: movieDetailLoader(queryClient),
-            path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
-          },
-        ],
-        element: <NowPlaying />,
-        loader: nowPlayingLoader(queryClient),
-        path: ROUTE_PATH.NOW_PLAYING,
+        element: <MovieList />,
+        loader: movieListLoader(queryClient),
+        path: ROUTE_PATH.LIST_TYPE,
       },
     ],
     element: <App />,

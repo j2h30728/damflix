@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DarkModeContext } from '../contexts/DarkModeContext';
-import ROUTE_PATH from '../router/ROUTE_PATH';
+import { MovieListType } from '../types/movies';
 
 const Header = () => {
   const { handleChangeDarkMode, isDark } = useContext(DarkModeContext);
@@ -14,17 +14,23 @@ const Header = () => {
       <Logo>DAMFLIX</Logo>
       <LinkContainer>
         <LinkAndCircle>
-          <Link to={ROUTE_PATH.HOME}>POPULAR</Link>
-          {pathname.slice(1) === ROUTE_PATH.HOME && <Circle layoutId="link" />}
+          <Link state={MovieListType.POPULAR} to={MovieListType.POPULAR}>
+            POPULAR
+          </Link>
+          {pathname.slice(1) === MovieListType.POPULAR && <Circle layoutId="link" />}
         </LinkAndCircle>
         <LinkAndCircle>
-          <Link to={ROUTE_PATH.COMING_SOON}>COMING SOON</Link>
-          {pathname.includes(ROUTE_PATH.COMING_SOON) && <Circle layoutId="link" />}
+          <Link state={MovieListType.UPCOMING} to={MovieListType.UPCOMING}>
+            COMING SOON
+          </Link>
+          {pathname.includes(MovieListType.UPCOMING) && <Circle layoutId="link" />}
         </LinkAndCircle>
 
         <LinkAndCircle>
-          <Link to={ROUTE_PATH.NOW_PLAYING}>NOW PLAYING</Link>
-          {pathname.includes(ROUTE_PATH.NOW_PLAYING) && <Circle layoutId="link" />}
+          <Link state={MovieListType.NOW_PLAYING} to={MovieListType.NOW_PLAYING}>
+            NOW PLAYING
+          </Link>
+          {pathname.includes(MovieListType.NOW_PLAYING) && <Circle layoutId="link" />}
         </LinkAndCircle>
       </LinkContainer>
 

@@ -1,10 +1,5 @@
-export { default as Home } from './Home';
-export { loader as homeLoader } from './Home/loader';
-
+export { default as MovieDetail } from './MovieDetail';
 export { loader as movieDetailLoader } from './MovieDetail/loader';
 
-export { default as NowPlaying } from './NowPlaying';
-export { loader as nowPlayingLoader } from './NowPlaying/loader';
-
-export { default as Upcoming } from './Upcoming';
-export { loader as upcomingLoader } from './Upcoming/loader';
+export { default as MovieList } from './MovieList';
+export { loader as movieListLoader } from './MovieList/loader';

@@ -61,3 +61,9 @@ export interface GetResponse<T> {
   status: number;
   statusText: string;
 }
+
+export enum MovieListType {
+  NOW_PLAYING = 'now-playing',
+  POPULAR = '',
+  UPCOMING = 'coming-soon',
+}
