@@ -28,13 +28,13 @@ const MovieDetail = () => {
         <MovieContents>
           <MovieDetailTitle>{movieDetailData?.original_title}</MovieDetailTitle>
           <span>{movieDetailData?.overview}</span>
-          <span>Budget: ${movieDetailData?.budget}</span>
-          <span>Revenue: ${movieDetailData?.revenue}</span>
+          <span>Budget: ${movieDetailData?.budget.toLocaleString()}</span>
+          <span>Revenue: ${movieDetailData?.revenue.toLocaleString()}</span>
           <span>Runtime: {movieDetailData?.runtime}minutes</span>
           <span>Rating: {movieDetailData?.vote_average}</span>
           {movieDetailData?.homepage && (
             <p>
-              Homepage: <a href={`${movieDetailData?.homepage}`}>이동하기</a>
+              Homepage: <a href={`${movieDetailData?.homepage}`}>{movieDetailData?.homepage}</a>
             </p>
           )}
         </MovieContents>
