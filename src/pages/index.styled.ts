@@ -15,6 +15,7 @@ export const MovieContainer = styled(motion(Link))`
   margin-bottom: 50px;
   justify-content: center;
   align-items: center;
+  width: 380px;
 `;
 
 export const MovieImage = styled.div<{ imagePath?: string }>`
@@ -33,6 +34,7 @@ export const MovieTitle = styled.h3`
 `;
 export const MovieWrapper = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   height: 100%;
 `;
@@ -43,8 +45,9 @@ export const MovieContents = styled.div`
   display: flex;
   flex-direction: column;
   line-height: 2rem;
-  p {
+  span {
     font-family: 'IM_Hyemin-Bold';
+    word-wrap: break-word;
   }
   overflow: auto;
 `;

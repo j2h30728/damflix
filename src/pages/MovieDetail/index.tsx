@@ -1,6 +1,7 @@
 import { useMatch, useOutletContext, useParams } from 'react-router-dom';
 
 import useControlModal from '../../../hooks/useControlModal';
+import { XMarkIcon } from '../../components';
 import Modal from '../../components/Modal';
 import { useQueryMovieDetailData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
@@ -20,16 +21,17 @@ const MovieDetail = () => {
   return (
     <Modal isOpen={isOpenModal} layoutId={`${listType}${movieDetailData?.id}`} onClose={handleCloseModal}>
       <MovieWrapper>
+        <XMarkIcon onClick={handleCloseModal} />
         <MovieDetailImage
           imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
         ></MovieDetailImage>
         <MovieContents>
           <MovieDetailTitle>{movieDetailData?.original_title}</MovieDetailTitle>
-          <p>{movieDetailData?.overview}</p>
-          <p>Budget: ${movieDetailData?.budget}</p>
-          <p>Revenue: ${movieDetailData?.revenue}</p>
-          <p>Runtime: {movieDetailData?.runtime}minutes</p>
-          <p>Rating: {movieDetailData?.vote_average}</p>
+          <span>{movieDetailData?.overview}</span>
+          <span>Budget: ${movieDetailData?.budget}</span>
+          <span>Revenue: ${movieDetailData?.revenue}</span>
+          <span>Runtime: {movieDetailData?.runtime}minutes</span>
+          <span>Rating: {movieDetailData?.vote_average}</span>
           {movieDetailData?.homepage && (
             <p>
               Homepage: <a href={`${movieDetailData?.homepage}`}>이동하기</a>

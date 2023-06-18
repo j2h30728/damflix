@@ -70,6 +70,13 @@ const DarkModeButton = styled.button`
   margin-right: 30px;
   background-color: ${props => props.theme.color.neutral};
   color: ${props => props.theme.color.text};
+  transition: 0.2s ease;
+  :hover {
+    scale: 1.2;
+  }
+  :active {
+    scale: 0.9;
+  }
 `;
 
 const LinkContainer = styled.div`
