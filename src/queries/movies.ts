@@ -4,10 +4,10 @@ import { getQueryKey as getMovieDetailQueryKey } from '../pages/MovieDetail/load
 import { getQueryKey as getMovieListQueryKey } from '../pages/MovieList/loader';
 import { Genres, GetMovieDetailResponseData, GetMoviesResponseData } from '../types/movies';
 
-type KeyofMovieListType = 'coming-soon' | 'now-playing' | 'popular';
+type KeyOfMovieListType = 'coming-soon' | 'now-playing' | 'popular';
 
 export const useQueryMoviesData = (listType: string | undefined = 'popular') =>
-  useQuery<GetMoviesResponseData>({ queryKey: getMovieListQueryKey(listType as KeyofMovieListType) });
+  useQuery<GetMoviesResponseData>({ queryKey: getMovieListQueryKey(listType as KeyOfMovieListType) });
 
 export const useQueryMovieDetailData = (movieId: string | undefined = '') => {
   const shouldFetch = !!movieId;
