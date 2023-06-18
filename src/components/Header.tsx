@@ -9,6 +9,10 @@ import { MovieListType } from '../types/movies';
 const Header = () => {
   const { handleChangeDarkMode, isDark } = useContext(DarkModeContext);
   const { pathname } = useLocation();
+  const isPopularType = pathname.slice(1) === MovieListType.POPULAR;
+  const isUpcomingType = pathname.includes(MovieListType.UPCOMING);
+  const isNowPlayingType = pathname.includes(MovieListType.NOW_PLAYING);
+
   return (
     <HeaderContainer>
       <Logo>DAMFLIX</Logo>
@@ -17,20 +21,20 @@ const Header = () => {
           <Link state={MovieListType.POPULAR} to={MovieListType.POPULAR}>
             POPULAR
           </Link>
-          {pathname.slice(1) === MovieListType.POPULAR && <Circle layoutId="link" />}
+          {isPopularType && <Circle layoutId="link" />}
         </LinkAndCircle>
         <LinkAndCircle>
           <Link state={MovieListType.UPCOMING} to={MovieListType.UPCOMING}>
             COMING SOON
           </Link>
-          {pathname.includes(MovieListType.UPCOMING) && <Circle layoutId="link" />}
+          {isUpcomingType && <Circle layoutId="link" />}
         </LinkAndCircle>
 
         <LinkAndCircle>
           <Link state={MovieListType.NOW_PLAYING} to={MovieListType.NOW_PLAYING}>
             NOW PLAYING
           </Link>
-          {pathname.includes(MovieListType.NOW_PLAYING) && <Circle layoutId="link" />}
+          {isNowPlayingType && <Circle layoutId="link" />}
         </LinkAndCircle>
       </LinkContainer>
 
@@ -43,8 +47,10 @@ export default Header;
 
 const HeaderContainer = styled.div`
   z-index: 1;
-  display: grid;
-  grid-template-columns: 4fr 5fr 1fr;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 140px;
   align-items: center;
   position: fixed;
   top: 0;

@@ -1,11 +1,10 @@
-import { AnimatePresence } from 'framer-motion';
 import { Outlet, useMatch, useParams } from 'react-router-dom';
 
 import useControlModal from '../../../hooks/useControlModal';
 import { useQueryMovieDetailData, useQueryMoviesData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
-import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from '../index.styled';
+import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {
   const { listType, movieId } = useParams();
@@ -19,22 +18,20 @@ const MovieList = () => {
 
   return (
     <>
-      <AnimatePresence>
-        <MoviesWrapper animate="visible" initial="hidden" key={listType} variants={containerVariants}>
-          {popularMoviesData?.results?.map(movie => (
-            <MovieContainer
-              key={`${listType}${movie.id}`}
-              layoutId={`${listType}${movie.id}`}
-              onClick={() => handleOpenMovie(isFetched)}
-              to={`movie/${movie.id}`}
-              variants={itemVariants}
-            >
-              <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
-              <MovieTitle>{movie.title}</MovieTitle>
-            </MovieContainer>
-          ))}
-        </MoviesWrapper>
-      </AnimatePresence>
+      <MoviesWrapper animate="visible" initial="hidden" key={listType} variants={containerVariants}>
+        {popularMoviesData?.results?.map(movie => (
+          <MovieContainer
+            key={`${listType}${movie.id}`}
+            layoutId={`${listType}${movie.id}`}
+            onClick={() => handleOpenMovie(isFetched)}
+            to={`movie/${movie.id}`}
+            variants={itemVariants}
+          >
+            <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
+            <MovieTitle>{movie.title}</MovieTitle>
+          </MovieContainer>
+        ))}
+      </MoviesWrapper>
 
       <Outlet context={{ listType: `${listType}` }} />
     </>

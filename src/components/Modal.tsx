@@ -1,32 +1,32 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
+import useLockBodyScroll from '../../hooks/useLockBodyScroll';
+
 interface ModalProps {
   children: React.ReactNode;
-  isOpen: boolean;
   layoutId: string;
   onClose: () => void;
 }
 
 const Modal = ({ children, layoutId, onClose }: ModalProps) => {
   const modalRoot = document.querySelector('#modal-root');
+  useLockBodyScroll();
 
   if (!modalRoot) return null;
   return ReactDOM.createPortal(
-    <AnimatePresence>
-      <ModalOverlay onClick={onClose}>
-        <ModalContent
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 0 }}
-          initial={{ opacity: 0, y: 0 }}
-          layoutId={layoutId}
-          onClick={e => e.stopPropagation()}
-        >
-          {children}
-        </ModalContent>
-      </ModalOverlay>
-    </AnimatePresence>,
+    <ModalOverlay onClick={onClose}>
+      <ModalContent
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 0 }}
+        initial={{ opacity: 0, y: 0 }}
+        layoutId={layoutId}
+        onClick={e => e.stopPropagation()}
+      >
+        {children}
+      </ModalContent>
+    </ModalOverlay>,
     modalRoot
   );
 };

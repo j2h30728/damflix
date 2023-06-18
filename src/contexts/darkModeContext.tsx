@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useState } from 'react';
 
 interface DarkModeContextType {
-  handleChangeDarkMode?: () => void;
+  handleChangeDarkMode: () => void;
   isDark: boolean;
 }
 
 export const DarkModeContext = createContext<DarkModeContextType>({
+  handleChangeDarkMode: () => {},
   isDark: true,
 });
 

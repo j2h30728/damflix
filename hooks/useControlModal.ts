@@ -15,7 +15,9 @@ const useControlModal = () => {
 
   const useCheckModalOnOff = (isListPagePathnameMatch: boolean) => {
     useEffect(() => {
-      isListPagePathnameMatch ? setIsOpenModal(false) : setIsOpenModal(true);
+      if (isListPagePathnameMatch) {
+        setIsOpenModal(false);
+      }
     }, [isListPagePathnameMatch]);
   };
 
