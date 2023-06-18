@@ -8,14 +8,6 @@ const ScrollTopButton = (props: SVGAttributes<SVGElement>) => {
     window.scrollTo({ behavior: 'smooth', top: 0 });
   };
 
-  const ScrollTopButtonIcon = styled(Svg)`
-    position: fixed;
-    right: 60px;
-    bottom: 4%;
-    background-color: ${props => props.theme.color.text};
-    color: ${props => props.theme.color.background};
-    padding: 13px;
-  `;
   return (
     <ScrollTopButtonIcon
       aria-hidden="true"
@@ -35,3 +27,12 @@ const ScrollTopButton = (props: SVGAttributes<SVGElement>) => {
 };
 
 export default ScrollTopButton;
+
+const ScrollTopButtonIcon = styled(Svg)`
+  position: fixed;
+  right: 60px;
+  bottom: 4%;
+  background-color: ${props => props.theme.color.text};
+  color: ${props => props.theme.color.background};
+  padding: 13px;
+`;
