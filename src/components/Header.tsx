@@ -22,7 +22,7 @@ const Header = () => {
           { condition: isUpcomingType, navigate: MovieListType.UPCOMING },
           { condition: isNowPlayingType, navigate: MovieListType.NOW_PLAYING },
         ].map(navigator => (
-          <LinkAndCircle>
+          <LinkAndCircle key={navigator.navigate}>
             <Link state={navigator.condition} to={navigator.navigate}>
               POPULAR
             </Link>
