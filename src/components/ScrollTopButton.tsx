@@ -11,9 +11,10 @@ const ScrollTopButton = (props: SVGAttributes<SVGElement>) => {
   const ScrollTopButtonIcon = styled(Svg)`
     position: fixed;
     right: 60px;
-    bottom: 2%;
-    background-color: ${props => props.theme.color.secondary};
-    padding: 15px;
+    bottom: 4%;
+    background-color: ${props => props.theme.color.text};
+    color: ${props => props.theme.color.background};
+    padding: 13px;
   `;
   return (
     <ScrollTopButtonIcon

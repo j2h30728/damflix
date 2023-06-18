@@ -17,25 +17,18 @@ const Header = () => {
     <HeaderContainer>
       <Logo>DAMFLIX</Logo>
       <LinkContainer>
-        <LinkAndCircle>
-          <Link state={MovieListType.POPULAR} to={MovieListType.POPULAR}>
-            POPULAR
-          </Link>
-          {isPopularType && <Circle layoutId="link" />}
-        </LinkAndCircle>
-        <LinkAndCircle>
-          <Link state={MovieListType.UPCOMING} to={MovieListType.UPCOMING}>
-            COMING SOON
-          </Link>
-          {isUpcomingType && <Circle layoutId="link" />}
-        </LinkAndCircle>
-
-        <LinkAndCircle>
-          <Link state={MovieListType.NOW_PLAYING} to={MovieListType.NOW_PLAYING}>
-            NOW PLAYING
-          </Link>
-          {isNowPlayingType && <Circle layoutId="link" />}
-        </LinkAndCircle>
+        {[
+          { condition: isPopularType, navigate: MovieListType.POPULAR },
+          { condition: isUpcomingType, navigate: MovieListType.UPCOMING },
+          { condition: isNowPlayingType, navigate: MovieListType.NOW_PLAYING },
+        ].map(navigator => (
+          <LinkAndCircle>
+            <Link state={navigator.condition} to={navigator.navigate}>
+              POPULAR
+            </Link>
+            {navigator.condition && <Circle layoutId="link" />}
+          </LinkAndCircle>
+        ))}
       </LinkContainer>
 
       <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>
