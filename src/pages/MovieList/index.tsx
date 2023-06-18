@@ -1,6 +1,6 @@
 import { Outlet, useMatch, useParams } from 'react-router-dom';
 
-import useControlModal from '../../../hooks/useControlModal';
+import useControlModal from '../../hooks/useControlModal';
 import { useQueryMovieDetailData, useQueryMoviesData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';

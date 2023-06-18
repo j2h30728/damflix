@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "hooks/useLockBodyScroll.ts"],
+  "include": ["src", "src/hooks/useLockBodyScroll.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

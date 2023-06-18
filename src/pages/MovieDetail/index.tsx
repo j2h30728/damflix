@@ -1,7 +1,7 @@
 import { useMatch, useOutletContext, useParams } from 'react-router-dom';
 
-import useControlModal from '../../../hooks/useControlModal';
 import { Modal, XMarkIcon } from '../../components';
+import useControlModal from '../../hooks/useControlModal';
 import { useQueryMovieDetailData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
