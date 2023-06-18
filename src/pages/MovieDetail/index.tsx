@@ -1,6 +1,6 @@
 import { useMatch, useOutletContext, useParams } from 'react-router-dom';
 
-import { Modal, XMarkIcon } from '../../components';
+import { Modal, XMarkIcon as ModalCloseButton } from '../../components';
 import useControlModal from '../../hooks/useControlModal';
 import { useQueryMovieDetailData } from '../../queries/movies';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
@@ -20,7 +20,7 @@ const MovieDetail = () => {
   return (
     <Modal layoutId={`${listType}${movieDetailData?.id}`} onClose={handleCloseModal}>
       <MovieWrapper>
-        <XMarkIcon onClick={handleCloseModal} />
+        <ModalCloseButton onClick={handleCloseModal} />
         <MovieDetailImage
           imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
         ></MovieDetailImage>

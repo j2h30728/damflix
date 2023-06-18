@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { Header } from './components';
+import { Header, ScrollTopButton } from './components';
 import { DarkModeContext } from './contexts/DarkModeContext';
 import GlobalStyle from './styles/GlobalStyle';
 import { darkTheme, lightTheme } from './styles/theme';
@@ -16,6 +16,7 @@ function App() {
       <Layout>
         <Header />
         <Outlet />
+        <ScrollTopButton />
       </Layout>
     </ThemeProvider>
   );
