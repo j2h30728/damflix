@@ -1,13 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
+import { getMovieListFetcher } from '../api/moives';
 import { getQueryKey as getMovieDetailQueryKey } from '../pages/MovieDetail/loader';
 import { getQueryKey as getMovieListQueryKey } from '../pages/MovieList/loader';
 import { Genres, GetMovieDetailResponseData, GetMoviesResponseData } from '../types/movies';
 
 type KeyOfMovieListType = 'coming-soon' | 'now-playing' | 'popular';
 
-export const useQueryMoviesData = (listType: string | undefined = 'popular') =>
-  useQuery<GetMoviesResponseData>({ queryKey: getMovieListQueryKey(listType as KeyOfMovieListType) });
+export const useQueryMoviesData = (listType: string | undefined = 'popular') => {
+  const queryKey = getMovieListQueryKey(listType as KeyOfMovieListType);
+  return useInfiniteQuery<GetMoviesResponseData, Error>({
+    getNextPageParam: lastPage => {
+      const nextPage = lastPage.page !== lastPage.total_pages ? lastPage.page + 1 : undefined;
+      return nextPage;
+    },
+    queryFn: ({ pageParam = 1, queryKey }) => getMovieListFetcher({ pageParam, queryKey }),
+    queryKey: queryKey,
+  });
+};
 
 export const useQueryMovieDetailData = (movieId: string | undefined = '') => {
   const shouldFetch = !!movieId;

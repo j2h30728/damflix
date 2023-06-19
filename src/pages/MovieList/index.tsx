@@ -1,17 +1,33 @@
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Outlet, useParams } from 'react-router-dom';
 
+import { Spinner } from '../../components';
 import { useQueryMoviesData } from '../../queries/movies';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {
+  const { inView, ref } = useInView({ threshold: 0 });
   const { listType } = useParams();
-  const { data: popularMoviesData } = useQueryMoviesData(listType);
+  const {
+    data: movieListData,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useQueryMoviesData(listType);
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
+  const movieListArray = movieListData?.pages?.flatMap(page => page.results);
   return (
     <>
       <MoviesWrapper animate="visible" initial="hidden" key={listType} variants={containerVariants}>
-        {popularMoviesData?.results?.map(movie => (
+        {movieListArray?.map(movie => (
           <MovieContainer
             key={`${listType}${movie.id}`}
             layoutId={`${listType}${movie.id}`}
@@ -27,7 +43,7 @@ const MovieList = () => {
           </MovieContainer>
         ))}
       </MoviesWrapper>
-
+      <div ref={ref}>{isFetching && isFetchingNextPage && hasNextPage ? <Spinner size={30} /> : null}</div>
       <Outlet context={{ listType: `${listType}` }} />
     </>
   );
