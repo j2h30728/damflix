@@ -19,7 +19,7 @@ export const getQueryKey = (type: keyof typeof MovieListTypeQueryKey): QueryKey 
 export const loader =
   (queryClient: QueryClient) =>
   async ({ params }: LoaderFunctionArgs) => {
-    const type = !Object.keys(params).length
+    const type = !Object.keys(params).includes('listType')
       ? MovieListTypeQueryKey.popular
       : (params.listType as keyof typeof MovieListTypeQueryKey);
 
