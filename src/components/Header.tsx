@@ -13,18 +13,20 @@ const Header = () => {
   const isUpcomingType = pathname.includes(MovieListType.UPCOMING);
   const isNowPlayingType = pathname.includes(MovieListType.NOW_PLAYING);
 
+  const NavigatorData = [
+    { condition: isPopularType, navigate: MovieListType.POPULAR, text: 'POPULAR' },
+    { condition: isUpcomingType, navigate: MovieListType.UPCOMING, text: 'COMING SOON' },
+    { condition: isNowPlayingType, navigate: MovieListType.NOW_PLAYING, text: 'NOW PLAYING' },
+  ];
+
   return (
     <HeaderContainer>
       <Logo>DAMFLIX</Logo>
       <LinkContainer>
-        {[
-          { condition: isPopularType, navigate: MovieListType.POPULAR },
-          { condition: isUpcomingType, navigate: MovieListType.UPCOMING },
-          { condition: isNowPlayingType, navigate: MovieListType.NOW_PLAYING },
-        ].map(navigator => (
+        {NavigatorData.map(navigator => (
           <LinkAndCircle key={navigator.navigate}>
             <Link state={navigator.condition} to={navigator.navigate}>
-              POPULAR
+              {navigator.text}
             </Link>
             {navigator.condition && <Circle layoutId="link" />}
           </LinkAndCircle>

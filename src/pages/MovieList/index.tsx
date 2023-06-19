@@ -1,20 +1,12 @@
-import { Outlet, useMatch, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
-import useControlModal from '../../hooks/useControlModal';
-import { useQueryMovieDetailData, useQueryMoviesData } from '../../queries/movies';
-import ROUTE_PATH from '../../router/ROUTE_PATH';
+import { useQueryMoviesData } from '../../queries/movies';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {
-  const { listType, movieId } = useParams();
+  const { listType } = useParams();
   const { data: popularMoviesData } = useQueryMoviesData(listType);
-  const { isFetched } = useQueryMovieDetailData(movieId);
-
-  const { handleOpenMovie, useCheckModalOnOff } = useControlModal();
-
-  const isListPagePathnameMatch = useMatch(ROUTE_PATH.HOME);
-  useCheckModalOnOff(!!isListPagePathnameMatch);
 
   return (
     <>
@@ -23,7 +15,6 @@ const MovieList = () => {
           <MovieContainer
             key={`${listType}${movie.id}`}
             layoutId={`${listType}${movie.id}`}
-            onClick={() => handleOpenMovie(isFetched)}
             to={`movie/${movie.id}`}
             variants={itemVariants}
           >

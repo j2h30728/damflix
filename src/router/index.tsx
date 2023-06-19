@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         ],
         element: <MovieList />,
         loader: movieListLoader(queryClient),
-        path: '',
+        path: ROUTE_PATH.HOME,
       },
       {
         children: [
