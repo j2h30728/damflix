@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { DarkModeContext } from '../contexts/DarkModeContext';
 import { MovieListType } from '../types/movies';
+import scrollTolTop from '../utils/scrollTolTop';
 
 const Header = () => {
   const { handleChangeDarkMode, isDark } = useContext(DarkModeContext);
@@ -24,7 +25,7 @@ const Header = () => {
       <Logo>DAMFLIX</Logo>
       <LinkContainer>
         {NavigatorData.map(navigator => (
-          <LinkAndCircle key={navigator.navigate}>
+          <LinkAndCircle key={navigator.navigate} onClick={scrollTolTop}>
             <Link state={navigator.condition} to={navigator.navigate}>
               {navigator.text}
             </Link>

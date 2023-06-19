@@ -1,18 +1,15 @@
 import { SVGAttributes } from 'react';
 import styled from 'styled-components';
 
+import scrollTolTop from '../utils/scrollTolTop';
 import { Svg } from './Icons';
 
 const ScrollTopButton = (props: SVGAttributes<SVGElement>) => {
-  const handleScrollTop = () => {
-    window.scrollTo({ behavior: 'smooth', top: 0 });
-  };
-
   return (
     <ScrollTopButtonIcon
       aria-hidden="true"
       fill="currentColor"
-      onClick={handleScrollTop}
+      onClick={scrollTolTop}
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/Svg"
       {...props}
