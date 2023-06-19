@@ -18,7 +18,7 @@ export const MovieContainer = styled(motion(Link))`
   width: 380px;
 `;
 
-export const MovieImage = styled.div<{ imagePath?: string }>`
+export const MovieImage = styled(motion.div)<{ imagePath?: string }>`
   width: 290px;
   height: 390px;
   border-radius: 5px;

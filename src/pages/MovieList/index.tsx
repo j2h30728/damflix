@@ -18,7 +18,11 @@ const MovieList = () => {
             to={`movie/${movie.id}`}
             variants={itemVariants}
           >
-            <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}></MovieImage>
+            <MovieImage
+              imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}
+              variants={imageVariants}
+              whileHover="hover"
+            ></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>
         ))}
@@ -47,5 +51,14 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
+  },
+};
+const imageVariants = {
+  hover: {
+    scale: 1.1,
+    transition: {
+      delay: 0.1,
+      duration: 0.2,
+    },
   },
 };
