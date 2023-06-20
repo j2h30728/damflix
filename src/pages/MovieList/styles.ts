@@ -32,3 +32,7 @@ export const MovieTitle = styled.h3`
   font-family: 'EF_jejudoldam';
   height: 30px;
 `;
+
+export const FetchingNextPage = styled.div`
+  margin: 20px 0;
+`;

@@ -11,6 +11,5 @@ export const getMovieListFetcher = async ({
   queryKey: QueryKey;
 }): Promise<GetMoviesResponseData> => {
   const result = await apiClient<GetMoviesResponseData>(`${BASE_URL}${queryKey.join('/')}&page=${pageParam}`);
-  console.log(result); // 이 부분 추가
   return result.data;
 };

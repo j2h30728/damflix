@@ -1,14 +1,12 @@
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { Outlet, useParams } from 'react-router-dom';
 
 import { Spinner } from '../../components';
+import useLoadMoreInfiniteScroll from '../../hooks/useLoadMoreInfiniteScroll';
 import { useQueryMoviesData } from '../../queries/movies';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
-import { MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
+import { FetchingNextPage, MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {
-  const { inView, ref } = useInView({ threshold: 0 });
   const { listType } = useParams();
   const {
     data: movieListData,
@@ -17,11 +15,7 @@ const MovieList = () => {
     isFetching,
     isFetchingNextPage,
   } = useQueryMoviesData(listType);
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView]);
+  const { ref } = useLoadMoreInfiniteScroll(fetchNextPage);
 
   const movieListArray = movieListData?.pages?.flatMap(page => page.results);
   return (
@@ -43,7 +37,9 @@ const MovieList = () => {
           </MovieContainer>
         ))}
       </MoviesWrapper>
-      <div ref={ref}>{isFetching && isFetchingNextPage && hasNextPage ? <Spinner size={30} /> : null}</div>
+      <FetchingNextPage ref={ref}>
+        {isFetching && isFetchingNextPage && hasNextPage ? <Spinner size={50} /> : null}
+      </FetchingNextPage>
       <Outlet context={{ listType: `${listType}` }} />
     </>
   );
