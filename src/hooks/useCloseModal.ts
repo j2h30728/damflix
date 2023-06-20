@@ -5,8 +5,9 @@ const useCloseModal = () => {
   const location = useLocation();
 
   const handleCloseModal = () => {
+    console.log(location);
     if (location.key === 'default') {
-      navigate('/', { replace: true });
+      navigate('/');
     } else {
       navigate(-1);
     }

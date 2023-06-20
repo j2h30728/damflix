@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const useLoadMoreInfiniteScroll = (fetchNextPage: () => void) => {
+import { useQueryMoviesData } from '../queries/movies';
+
+const useLoadMoreInfiniteScroll = (listType: string | undefined) => {
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } = useQueryMoviesData(listType);
   const { inView, ref } = useInView({ threshold: 0 });
 
   useEffect(() => {
@@ -9,7 +12,9 @@ const useLoadMoreInfiniteScroll = (fetchNextPage: () => void) => {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
+  const movieListData = data?.pages?.flatMap(page => page.results);
 
-  return { ref };
+  return { hasNextPage, isFetching, isFetchingNextPage, movieListData, ref };
 };
+
 export default useLoadMoreInfiniteScroll;

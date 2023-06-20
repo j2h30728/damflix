@@ -2,26 +2,17 @@ import { Outlet, useParams } from 'react-router-dom';
 
 import { Spinner } from '../../components';
 import useLoadMoreInfiniteScroll from '../../hooks/useLoadMoreInfiniteScroll';
-import { useQueryMoviesData } from '../../queries/movies';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { FetchingNextPage, MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {
   const { listType } = useParams();
-  const {
-    data: movieListData,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-  } = useQueryMoviesData(listType);
-  const { ref } = useLoadMoreInfiniteScroll(fetchNextPage);
+  const { hasNextPage, isFetching, isFetchingNextPage, movieListData, ref } = useLoadMoreInfiniteScroll(listType);
 
-  const movieListArray = movieListData?.pages?.flatMap(page => page.results);
   return (
     <>
       <MoviesWrapper animate="visible" initial="hidden" key={listType} variants={containerVariants}>
-        {movieListArray?.map(movie => (
+        {movieListData?.map(movie => (
           <MovieContainer
             key={`${listType}${movie.id}`}
             layoutId={`${listType}${movie.id}`}
