@@ -1,4 +1,4 @@
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { Modal, XMarkIcon as ModalCloseButton } from '../../components';
 import useCloseModal from '../../hooks/useCloseModal';
@@ -7,7 +7,7 @@ import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContents, MovieDetailImage, MovieDetailTitle, MovieWrapper } from './styles';
 
 const MovieDetail = () => {
-  const { listType } = useOutletContext() as { listType: string | undefined };
+  const { listType } = useParams();
   const { movieId } = useParams();
   const { data: movieDetailData } = useQueryMovieDetailData(movieId);
 

@@ -40,7 +40,7 @@ const MovieList = () => {
       <FetchingNextPage ref={ref}>
         {isFetching && isFetchingNextPage && hasNextPage ? <Spinner size={50} /> : null}
       </FetchingNextPage>
-      <Outlet context={{ listType: `${listType}` }} />
+      <Outlet />
     </>
   );
 };
