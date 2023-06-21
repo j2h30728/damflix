@@ -20,18 +20,6 @@ const router = createBrowserRouter([
         ],
         element: <MovieList />,
         loader: movieListLoader(queryClient),
-        path: ROUTE_PATH.HOME,
-      },
-      {
-        children: [
-          {
-            element: <MovieDetail />,
-            loader: movieDetailLoader(queryClient),
-            path: ROUTE_PATH.MOVIE_DETAIL_PAGE,
-          },
-        ],
-        element: <MovieList />,
-        loader: movieListLoader(queryClient),
         path: ROUTE_PATH.LIST_TYPE,
       },
     ],

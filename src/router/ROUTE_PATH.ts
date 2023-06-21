@@ -1,6 +1,5 @@
 const ROUTE_PATH = {
-  HOME: '',
-  LIST_TYPE: ':listType',
+  LIST_TYPE: ':listType?',
   MOVIE_DETAIL_PAGE: 'movie/:movieId',
   ROOT: '/',
 } as const;
