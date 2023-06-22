@@ -1,9 +1,10 @@
-import type { QueryKey } from '@tanstack/react-query';
+import type { InfiniteData, QueryKey } from '@tanstack/react-query';
 import type { LoaderFunctionArgs } from 'react-router-dom';
 
 import { QueryClient } from '@tanstack/react-query';
 
-import { GetMoviesResponseData, GetResponse } from '../../types/movies';
+import { getMovieListFetcher } from '../../api/moives';
+import { GetMoviesResponseData } from '../../types/movies';
 
 export enum MovieListTypeQueryKey {
   'coming-soon' = 'upcoming',
@@ -26,7 +27,10 @@ export const loader =
     const queryKey = getQueryKey(type);
 
     return (
-      queryClient.getQueryData<GetResponse<GetMoviesResponseData>>(queryKey) ??
-      (await queryClient.fetchQuery<GetResponse<GetMoviesResponseData>>(queryKey))
+      queryClient.getQueryData<InfiniteData<GetMoviesResponseData>>(queryKey) ??
+      (await queryClient.fetchInfiniteQuery({
+        queryFn: async () => getMovieListFetcher({ pageParam: 1, queryKey }),
+        queryKey,
+      }))
     );
   };
