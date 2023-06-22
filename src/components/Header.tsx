@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DarkModeContext } from '../contexts/DarkModeContext';
+import ROUTE_PATH from '../router/ROUTE_PATH';
 import { MovieListType } from '../types/movies';
 import scrollTolTop from '../utils/scrollTolTop';
 
@@ -33,7 +34,7 @@ const Header = () => {
           </LinkAndCircle>
         ))}
       </LinkContainer>
-
+      <Link to={`/${ROUTE_PATH.LOG_IN}`}>로그인/회원가입</Link>
       <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>
     </HeaderContainer>
   );
