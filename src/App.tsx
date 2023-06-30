@@ -1,18 +1,14 @@
-import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
 import { Header, ScrollTopButton } from './components';
 import { AuthContextProvider } from './contexts/AuthContext';
-import { DarkModeContext } from './contexts/DarkModeContext';
+import { DarkModeContextProvider } from './contexts/DarkModeContext';
 import GlobalStyle from './styles/GlobalStyle';
-import { darkTheme, lightTheme } from './styles/theme';
 
 function App() {
-  const { isDark } = useContext(DarkModeContext);
-
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+    <DarkModeContextProvider>
       <AuthContextProvider>
         <GlobalStyle />
         <Layout>
@@ -21,7 +17,7 @@ function App() {
           <ScrollTopButton />
         </Layout>
       </AuthContextProvider>
-    </ThemeProvider>
+    </DarkModeContextProvider>
   );
 }
 
