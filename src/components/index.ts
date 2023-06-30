@@ -3,3 +3,5 @@ export { XMarkIcon } from './Icons';
 export { default as Modal } from './Modal';
 export { default as ScrollTopButton } from './ScrollTopButton';
 export { default as Spinner } from './Spinner';
+
+export { default as AuthInput } from './common/AuthInput';

@@ -1,8 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
-import { MovieList, movieDetailLoader, movieListLoader } from '../pages';
-import Auth from '../pages/Auth/indx';
+import { MovieList, SignIn, SignUp, movieDetailLoader, movieListLoader } from '../pages';
 import ErrorPage from '../pages/ErrorPage';
 import MovieDetail from '../pages/MovieDetail';
 import queryClient from '../utils/queryClient';
@@ -12,12 +11,12 @@ const router = createBrowserRouter([
   {
     children: [
       {
-        element: <Auth />,
-        path: ROUTE_PATH.LOG_IN,
+        element: <SignIn />,
+        path: ROUTE_PATH.SIGN_IN,
       },
       {
-        element: <Auth />,
-        path: ROUTE_PATH.CREATE_ACCOUNT,
+        element: <SignUp />,
+        path: ROUTE_PATH.SIGN_UP,
       },
       {
         children: [

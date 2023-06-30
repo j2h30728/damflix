@@ -23,18 +23,21 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo>DAMFLIX</Logo>
+      <Logo to={`/`}>DAMFLIX</Logo>
       <LinkContainer>
         {NavigatorData.map(navigator => (
           <LinkAndCircle key={navigator.navigate} onClick={scrollTolTop}>
-            <Link state={navigator.condition} to={navigator.navigate}>
+            <Navigator state={navigator.condition} to={navigator.navigate}>
               {navigator.text}
-            </Link>
+            </Navigator>
             {navigator.condition && <Circle layoutId="link" />}
           </LinkAndCircle>
         ))}
       </LinkContainer>
-      <Link to={`/${ROUTE_PATH.LOG_IN}`}>로그인/회원가입</Link>
+      <div>
+        <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>/
+        <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
+      </div>
       <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>
     </HeaderContainer>
   );
@@ -55,13 +58,22 @@ const HeaderContainer = styled.div`
   height: 85px;
   background-color: ${props => props.theme.color.secondary};
 `;
-const Logo = styled.div`
+const Logo = styled(Link)`
   color: ${props => props.theme.color.point};
   font-size: 40px;
   font-family: 'EF_jejudoldam';
   letter-spacing: -5px;
   text-shadow: -2px -2px 0 ${props => props.theme.color.primary}, 2px -2px 0 ${props => props.theme.color.primary},
     -2px 2px 0 ${props => props.theme.color.primary}, 2px 2px 0 ${props => props.theme.color.primary};
+`;
+
+const Navigator = styled(Link)`
+  :hover {
+    color: ${props => props.theme.color.point};
+  }
+  :active {
+    color: ${props => props.theme.color.neutral};
+  }
 `;
 
 const DarkModeButton = styled.button`
