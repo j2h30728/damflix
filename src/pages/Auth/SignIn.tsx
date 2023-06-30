@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { AuthInput } from '../../components';
+import { AuthContext } from '../../contexts/AuthContext';
 import { signInWithEmail } from '../../fbase';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { AnotherLink, AuthButton, AuthForm, Container, Navigator, Title } from './auth.styled';
@@ -8,6 +10,7 @@ import { AnotherLink, AuthButton, AuthForm, Container, Navigator, Title } from '
 type AuthInput = Record<'email' | 'password', string>;
 
 const SignIn = () => {
+  const { logIn } = useContext(AuthContext);
   const {
     formState: { errors },
     handleSubmit,
@@ -16,9 +19,10 @@ const SignIn = () => {
 
   const onSubmit = async ({ email, password }: AuthInput) => {
     try {
-      const { user } = await signInWithEmail(email, password);
-      alert(`${user.email}님. 반갑습니다!`);
-      console.log('user');
+      const response = await signInWithEmail(email, password);
+      const accessToken = await response.user.getIdToken();
+      alert(`${response.user.email}님. 반갑습니다!`);
+      logIn(accessToken);
     } catch (error) {
       console.log(error);
       alert('이메일 또는 비밀번호 확인부탁드립니다.');

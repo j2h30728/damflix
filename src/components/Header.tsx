@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { AuthContext } from '../contexts/AuthContext';
 import { DarkModeContext } from '../contexts/DarkModeContext';
 import ROUTE_PATH from '../router/ROUTE_PATH';
 import { MovieListType } from '../types/movies';
@@ -10,6 +11,13 @@ import scrollTolTop from '../utils/scrollTolTop';
 
 const Header = () => {
   const { handleChangeDarkMode, isDark } = useContext(DarkModeContext);
+  const { isLoggedIn, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    if (confirm('로그아웃 하시겠습니까?')) {
+      logOut();
+    }
+  };
+
   const { pathname } = useLocation();
   const isPopularType = pathname.slice(1) === MovieListType.POPULAR;
   const isUpcomingType = pathname.includes(MovieListType.UPCOMING);
@@ -34,10 +42,14 @@ const Header = () => {
           </LinkAndCircle>
         ))}
       </LinkContainer>
-      <div>
-        <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>/
-        <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
-      </div>
+      {isLoggedIn ? (
+        <LogOutButton onClick={handleLogout}>로그아웃</LogOutButton>
+      ) : (
+        <div>
+          <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>/
+          <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
+        </div>
+      )}
       <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>
     </HeaderContainer>
   );
@@ -117,3 +129,4 @@ const LinkAndCircle = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+const LogOutButton = styled.div``;

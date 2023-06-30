@@ -25,7 +25,6 @@ const SignUp = () => {
       const user = await signUpWithEmail(email, password);
       navigate('/');
       alert(`${user.email}님. 회원가입 되었습니다!`);
-      console.log(user);
     } catch (error) {
       console.log(error);
       alert('존재하는 이메일 또는 잘못된 입력입니다. 확인부탁드립니다.');
