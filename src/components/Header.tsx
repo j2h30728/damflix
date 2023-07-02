@@ -17,11 +17,10 @@ const Header = () => {
       logOut();
     }
   };
-
   const { pathname } = useLocation();
-  const isPopularType = pathname.slice(1) === MovieListType.POPULAR;
+  const isPopularType = pathname.slice(1) === MovieListType.POPULAR || pathname.slice(1, 6) === 'movie';
   const isUpcomingType = pathname.includes(MovieListType.UPCOMING);
-  const isNowPlayingType = pathname.includes(MovieListType.NOW_PLAYING);
+  const isNowPlayingType = pathname.match(MovieListType.NOW_PLAYING);
 
   const NavigatorData = [
     { condition: isPopularType, navigate: MovieListType.POPULAR, text: 'POPULAR' },
