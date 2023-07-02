@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -24,8 +25,10 @@ const SignIn = () => {
       alert(`${response.user.email}님. 반갑습니다!`);
       logIn(accessToken);
     } catch (error) {
-      console.log(error);
-      alert('이메일 또는 비밀번호 확인부탁드립니다.');
+      if (error instanceof FirebaseError) {
+        alert(`[ERROR]${error.message}\n이메일 또는 비밀번호 확인부탁드립니다.`);
+        console.log(error.message);
+      }
     }
   };
 

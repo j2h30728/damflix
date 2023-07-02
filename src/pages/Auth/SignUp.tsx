@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,11 +27,12 @@ const SignUp = () => {
       navigate('/');
       alert(`${user.email}님. 회원가입 되었습니다!`);
     } catch (error) {
-      console.log(error);
-      alert('존재하는 이메일 또는 잘못된 입력입니다. 확인부탁드립니다.');
+      if (error instanceof FirebaseError) {
+        alert(`[ERROR]${error.message}\n이메일 또는 비밀번호 확인부탁드립니다.`);
+        console.log(error.message);
+      }
     }
   };
-
   return (
     <Container>
       <Title>회원가입</Title>
