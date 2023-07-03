@@ -66,7 +66,7 @@ const SignIn = () => {
         <span>계정이 없으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
       </AnotherLink>
-      <SocialLogin OnClickSocialAuthButton={handleClickSocialAuthButton} />
+      <SocialLogin onClickSocialAuthButton={handleClickSocialAuthButton} />
       <ErrorMessage>{errors.root?.message}</ErrorMessage>
     </Container>
   );

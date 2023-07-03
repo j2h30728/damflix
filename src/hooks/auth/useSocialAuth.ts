@@ -12,7 +12,7 @@ const useSocialAuth = () => {
         const response = await gitHubAuth();
         const accessToken = await response.user.getIdToken();
         if (response.user.email) {
-          return logIn({ accessToken, userEmail: response.user.email });
+          return logIn(accessToken);
         }
       }
 
@@ -20,7 +20,7 @@ const useSocialAuth = () => {
         const response = await googleAuth();
         const accessToken = await response.user.getIdToken();
         if (response.user.email) {
-          return logIn({ accessToken, userEmail: response.user.email });
+          return logIn(accessToken);
         }
       }
     } catch (error) {

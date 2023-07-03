@@ -4,17 +4,17 @@ import { AuthContainer, AuthSocialButton } from '../../pages/Auth/auth.styled';
 import { GitHubIcon, GoogleIcon } from './Icons';
 
 const SocialLogin = ({
-  OnClickSocialAuthButton,
+  onClickSocialAuthButton,
 }: {
-  OnClickSocialAuthButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickSocialAuthButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
   return (
     <AuthContainer>
-      <AuthSocialButton name="google" onClick={OnClickSocialAuthButton}>
+      <AuthSocialButton name="google" onClick={onClickSocialAuthButton}>
         <span>Continue with google</span>
         <GoogleIcon width={20} />
       </AuthSocialButton>
-      <AuthSocialButton name="github" onClick={OnClickSocialAuthButton}>
+      <AuthSocialButton name="github" onClick={onClickSocialAuthButton}>
         <span>Continue with github</span>
         <GitHubIcon width={20} />
       </AuthSocialButton>

@@ -90,7 +90,7 @@ const SignUp = () => {
         <span>계정이 있으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>
       </AnotherLink>
-      <SocialLogin OnClickSocialAuthButton={handleClickSocialAuthButton} />
+      <SocialLogin onClickSocialAuthButton={handleClickSocialAuthButton} />
       <ErrorMessage>{errors.root?.message}</ErrorMessage>
     </Container>
   );
