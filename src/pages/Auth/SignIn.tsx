@@ -1,49 +1,38 @@
-import { FirebaseError } from 'firebase/app';
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { AuthInput } from '../../components';
-import { GitHubIcon, GoogleIcon } from '../../components/auth/Icons';
-import { AuthContext } from '../../contexts/AuthContext';
-import { signInWithEmail } from '../../fbase';
+import { ErrorMessage } from '../../components/auth/AuthInput';
+import SocialLogin from '../../components/auth/SocialLogin';
+import useAuth from '../../hooks/auth/useAuth';
+import useSocialAuth from '../../hooks/auth/useSocialAuth';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
-import {
-  AnotherLink,
-  AuthButton,
-  AuthContainer,
-  AuthForm,
-  AuthSocialButton,
-  Container,
-  Navigator,
-  Title,
-} from './auth.styled';
+import { AnotherLink, AuthButton, AuthForm, Container, Navigator, Title } from './auth.styled';
 
 type AuthInput = Record<'email' | 'password', string>;
 
 const SignIn = () => {
-  const { logIn } = useContext(AuthContext);
+  const socialLogin = useSocialAuth();
+  const { signInFireBaseWithEmail } = useAuth();
   const {
     formState: { errors },
     handleSubmit,
     register,
+    setError,
   } = useForm<AuthInput>({ defaultValues: { email: '', password: '' } });
 
   const onSubmit = async ({ email, password }: AuthInput) => {
-    try {
-      const response = await signInWithEmail(email, password);
-      const accessToken = await response.user.getIdToken();
-      alert(`${response.user.email}님. 반갑습니다!`);
-      logIn(accessToken);
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        alert(`[ERROR]${error.message}\n이메일 또는 비밀번호 확인부탁드립니다.`);
-        console.log(error.message);
-      }
+    const signInResponse = await signInFireBaseWithEmail(email, password);
+    if (typeof signInResponse === 'string') {
+      setError('root', { message: signInResponse });
+      alert(signInResponse);
     }
   };
 
-  const handleClickSocialAuthButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget.name);
+  const handleClickSocialAuthButton = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const socialLoginResponse = await socialLogin(event.currentTarget.name);
+    if (typeof socialLoginResponse === 'string') {
+      setError('root', { message: socialLoginResponse });
+    }
   };
 
   return (
@@ -77,16 +66,8 @@ const SignIn = () => {
         <span>계정이 없으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
       </AnotherLink>
-      <AuthContainer>
-        <AuthSocialButton name="google" onClick={handleClickSocialAuthButton}>
-          <span>Continue with google</span>
-          <GoogleIcon width={20} />
-        </AuthSocialButton>
-        <AuthSocialButton name="github" onClick={handleClickSocialAuthButton}>
-          <span>Continue with github</span>
-          <GitHubIcon width={20} />
-        </AuthSocialButton>
-      </AuthContainer>
+      <SocialLogin OnClickSocialAuthButton={handleClickSocialAuthButton} />
+      <ErrorMessage>{errors.root?.message}</ErrorMessage>
     </Container>
   );
 };

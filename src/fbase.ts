@@ -1,7 +1,14 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 
 const {
   VITE_FIREBASE_API_KEY,
@@ -38,9 +45,14 @@ export const signUpWithEmail = async (email: string, password: string) => {
 
 export const signInWithEmail = (email: string, password: string) => {
   return signInWithEmailAndPassword(auth, email, password);
+};
 
-  // return userCredential.user;
-  // const userCredential = await signInWithEmailAndPassword(auth, email, password);
+export const googleAuth = () => {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
+};
 
-  // return userCredential.user;
+export const gitHubAuth = () => {
+  const provider = new GithubAuthProvider();
+  return signInWithPopup(auth, provider);
 };

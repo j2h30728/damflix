@@ -28,7 +28,7 @@ const Input = styled.input`
   border-radius: 10px;
 `;
 
-const ErrorMessage = styled.p`
+export const ErrorMessage = styled.p`
   color: red;
   height: 10px;
   font-size: 15px;
