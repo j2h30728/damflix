@@ -3,10 +3,20 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { AuthInput } from '../../components';
+import { GitHubIcon, GoogleIcon } from '../../components/auth/Icons';
 import { AuthContext } from '../../contexts/AuthContext';
 import { signInWithEmail } from '../../fbase';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
-import { AnotherLink, AuthButton, AuthForm, Container, Navigator, Title } from './auth.styled';
+import {
+  AnotherLink,
+  AuthButton,
+  AuthContainer,
+  AuthForm,
+  AuthSocialButton,
+  Container,
+  Navigator,
+  Title,
+} from './auth.styled';
 
 type AuthInput = Record<'email' | 'password', string>;
 
@@ -30,6 +40,10 @@ const SignIn = () => {
         console.log(error.message);
       }
     }
+  };
+
+  const handleClickSocialAuthButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(event.currentTarget.name);
   };
 
   return (
@@ -63,6 +77,16 @@ const SignIn = () => {
         <span>계정이 없으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
       </AnotherLink>
+      <AuthContainer>
+        <AuthSocialButton name="google" onClick={handleClickSocialAuthButton}>
+          <span>Continue with google</span>
+          <GoogleIcon width={20} />
+        </AuthSocialButton>
+        <AuthSocialButton name="github" onClick={handleClickSocialAuthButton}>
+          <span>Continue with github</span>
+          <GitHubIcon width={20} />
+        </AuthSocialButton>
+      </AuthContainer>
     </Container>
   );
 };
