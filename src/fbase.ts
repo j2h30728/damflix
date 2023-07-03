@@ -47,12 +47,12 @@ export const signInWithEmail = (email: string, password: string) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
+const googleAuthProvider = new GoogleAuthProvider();
 export const googleAuth = () => {
-  const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider);
+  return signInWithPopup(auth, googleAuthProvider);
 };
 
+const gitHubAuthProvider = new GithubAuthProvider();
 export const gitHubAuth = () => {
-  const provider = new GithubAuthProvider();
-  return signInWithPopup(auth, provider);
+  return signInWithPopup(auth, gitHubAuthProvider);
 };
