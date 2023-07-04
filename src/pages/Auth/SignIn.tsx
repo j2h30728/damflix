@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
 
-import { AuthInput } from '../../components';
-import { ErrorMessage } from '../../components/auth/AuthInput';
+import { FormInput } from '../../components';
+import { ErrorMessage } from '../../components/auth/FormInput';
 import SocialLogin from '../../components/auth/SocialLogin';
 import useAuth from '../../hooks/auth/useAuth';
 import useSocialAuth from '../../hooks/auth/useSocialAuth';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
-import { AnotherLink, AuthButton, AuthForm, Container, Navigator, Title } from './auth.styled';
+import { AnotherLink, Container, Form, FormButton, Navigator, Title } from './auth.styled';
 
-type AuthInput = Record<'email' | 'password', string>;
+type FormInput = Record<'email' | 'password', string>;
 
 const SignIn = () => {
   const socialLogin = useSocialAuth();
@@ -18,9 +18,9 @@ const SignIn = () => {
     handleSubmit,
     register,
     setError,
-  } = useForm<AuthInput>({ defaultValues: { email: '', password: '' } });
+  } = useForm<FormInput>();
 
-  const onSubmit = async ({ email, password }: AuthInput) => {
+  const onSubmit = async ({ email, password }: FormInput) => {
     const signInResponse = await signInFireBaseWithEmail(email, password);
     if (typeof signInResponse === 'string') {
       setError('root', { message: signInResponse });
@@ -38,8 +38,8 @@ const SignIn = () => {
   return (
     <Container>
       <Title>로그인</Title>
-      <AuthForm onSubmit={handleSubmit(onSubmit)}>
-        <AuthInput
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <FormInput
           register={{
             ...register('email', {
               pattern: { message: '이메일 형식으로 입력부탁드립니다.', value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/ },
@@ -52,7 +52,7 @@ const SignIn = () => {
           title="이메일"
           type="email"
         />
-        <AuthInput
+        <FormInput
           errorMessage={errors.password?.message}
           id="password"
           placeholder="비밀번호를 입력해주세요."
@@ -60,8 +60,8 @@ const SignIn = () => {
           title="비밀번호"
           type="password"
         />
-        <AuthButton>로그인하기</AuthButton>
-      </AuthForm>
+        <FormButton>로그인하기</FormButton>
+      </Form>
       <AnotherLink>
         <span>계정이 없으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>

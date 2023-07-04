@@ -14,7 +14,7 @@ export const Title = styled.h2`
   font-size: 35px;
 `;
 
-export const AuthForm = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -36,11 +36,11 @@ const Button = styled.button`
   }
 `;
 
-export const AuthButton = styled(Button)`
+export const FormButton = styled(Button)`
   background-color: ${props => props.theme.color.neutral};
   color: ${props => props.theme.color.text};
 `;
-export const AuthSocialButton = styled(Button)`
+export const SocialLoginButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +67,7 @@ export const AnotherLink = styled.div`
   gap: 20px;
 `;
 
-export const AuthContainer = styled.div`
+export const SocialLoginContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;

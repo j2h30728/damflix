@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 import styled from 'styled-components';
 
-interface AuthInputProps {
+interface FormInputProps {
   errorMessage?: string;
   id: string;
   placeholder: string;
@@ -10,7 +10,7 @@ interface AuthInputProps {
   type: 'email' | 'password';
 }
 
-const AuthInput = ({ errorMessage, id, placeholder, register, title, type }: AuthInputProps) => {
+const FormInput = ({ errorMessage, id, placeholder, register, title, type }: FormInputProps) => {
   return (
     <>
       <label htmlFor={id}>{title}</label>
@@ -20,7 +20,7 @@ const AuthInput = ({ errorMessage, id, placeholder, register, title, type }: Aut
   );
 };
 
-export default AuthInput;
+export default FormInput;
 
 const Input = styled.input`
   width: 95%;
