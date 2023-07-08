@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,13 +9,7 @@ interface AuthContextType {
   logOut: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType>({
-  isLoggedIn: false,
-  logIn: (accessToken: string) => {
-    accessToken;
-  },
-  logOut: () => {},
-});
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

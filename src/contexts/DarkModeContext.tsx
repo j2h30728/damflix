@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
@@ -9,10 +8,7 @@ interface DarkModeContextType {
   isDark: boolean;
 }
 
-export const DarkModeContext = createContext<DarkModeContextType>({
-  handleChangeDarkMode: () => {},
-  isDark: true,
-});
+export const DarkModeContext = createContext<DarkModeContextType>({} as DarkModeContextType);
 
 export const DarkModeContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(true);
