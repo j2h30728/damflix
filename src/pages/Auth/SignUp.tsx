@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { FormInput } from '../../components';
 import { ErrorMessage } from '../../components/auth/FormInput';
-import SocialLogIn from '../../components/auth/SocialLogIn';
+import SocialSignIn from '../../components/auth/SocialSignIn';
 import { SOCIAL_SIGN_IN } from '../../constants/auth';
 import ROUTE_PATH from '../../constants/route';
 import { useSignUp, useSocialAuth } from '../../hooks';
@@ -14,8 +14,8 @@ type FormInput = Record<'email' | 'password' | 'passwordConform', string>;
 const SignUp = () => {
   const signUpMutation = useSignUp();
   const { useGitHubAuth, useGoogleAuth } = useSocialAuth();
-  const { error: googleAuthError, mutate: googleAuthLoginMutate } = useGoogleAuth();
-  const { error: gitHubAuthError, mutate: gitHubAuthLoginMutate } = useGitHubAuth();
+  const { error: googleAuthError, mutate: googleAuthSignInMutate } = useGoogleAuth();
+  const { error: gitHubAuthError, mutate: gitHubAuthSignInMutate } = useGitHubAuth();
 
   const {
     formState: { errors },
@@ -32,10 +32,10 @@ const SignUp = () => {
   };
   const handleClickSocialAuthButton = async (event: React.MouseEvent<HTMLButtonElement>) => {
     if (event.currentTarget.name === SOCIAL_SIGN_IN.GOOGLE) {
-      googleAuthLoginMutate();
+      googleAuthSignInMutate();
     }
     if (event.currentTarget.name === SOCIAL_SIGN_IN.GITHUB) {
-      gitHubAuthLoginMutate();
+      gitHubAuthSignInMutate();
     }
   };
 
@@ -96,7 +96,7 @@ const SignUp = () => {
         <span>계정이 있으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>
       </AnotherLink>
-      <SocialLogIn onClickSocialAuthButton={handleClickSocialAuthButton} />
+      <SocialSignIn onClickSocialAuthButton={handleClickSocialAuthButton} />
       <ErrorMessage>{errors.root?.message}</ErrorMessage>
     </Container>
   );

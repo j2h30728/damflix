@@ -5,8 +5,8 @@ import { getTokenFromLocalStorage, removeTokenFromLocalStorage, setTokenFromLoca
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  logIn: (accessToken: string) => void;
   logOut: () => void;
+  signIn: (accessToken: string) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  const logIn = (accessToken: string) => {
+  const signIn = (accessToken: string) => {
     setTokenFromLocalStorage(accessToken);
     setIsLoggedIn(true);
     return navigate('/');
@@ -27,14 +27,14 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     return navigate('/');
   };
 
-  const checkedLogInState = () => {
+  const checkedSignInState = () => {
     const accessToken = getTokenFromLocalStorage();
     return typeof accessToken === 'string';
   };
 
   useEffect(() => {
-    checkedLogInState() ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    checkedSignInState() ? setIsLoggedIn(true) : setIsLoggedIn(false);
   }, []);
 
-  return <AuthContext.Provider value={{ isLoggedIn, logIn, logOut }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ isLoggedIn, logOut, signIn }}>{children}</AuthContext.Provider>;
 };

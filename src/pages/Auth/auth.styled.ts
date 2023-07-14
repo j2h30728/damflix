@@ -40,7 +40,7 @@ export const FormButton = styled(Button)`
   background-color: ${props => props.theme.color.neutral};
   color: ${props => props.theme.color.text};
 `;
-export const SocialLoginButton = styled(Button)`
+export const SocialSignInButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +67,7 @@ export const AnotherLink = styled.div`
   gap: 20px;
 `;
 
-export const SocialLoginContainer = styled.div`
+export const SocialSignInContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;

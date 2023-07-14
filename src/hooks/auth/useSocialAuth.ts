@@ -4,13 +4,13 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useGitHubAuthSignInWithPopup, useGoogleAuthSignInWithPopup } from '../../queries/auth';
 
 const useSocialAuth = () => {
-  const { logIn } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const useGoogleAuth = () =>
     useGoogleAuthSignInWithPopup({
       onSuccess: async responseData => {
         const accessToken = await responseData.user.getIdToken();
-        return logIn(accessToken);
+        return signIn(accessToken);
       },
     });
 
@@ -18,7 +18,7 @@ const useSocialAuth = () => {
     return useGitHubAuthSignInWithPopup({
       onSuccess: async responseData => {
         const accessToken = await responseData.user.getIdToken();
-        return logIn(accessToken);
+        return signIn(accessToken);
       },
     });
   };
