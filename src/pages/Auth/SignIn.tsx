@@ -1,39 +1,47 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { FormInput } from '../../components';
 import { ErrorMessage } from '../../components/auth/FormInput';
-import SocialLogin from '../../components/auth/SocialLogin';
-import useAuth from '../../hooks/auth/useAuth';
-import useSocialAuth from '../../hooks/auth/useSocialAuth';
+import SocialLogIn from '../../components/auth/SocialLogIn';
+import { SOCIAL_SIGN_IN } from '../../constants/auth';
+import { useSignIn, useSocialAuth } from '../../hooks';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { AnotherLink, Container, Form, FormButton, Navigator, Title } from './auth.styled';
 
 type FormInput = Record<'email' | 'password', string>;
 
 const SignIn = () => {
-  const socialLogin = useSocialAuth();
-  const { signInFireBaseWithEmail } = useAuth();
+  const signInMutation = useSignIn();
+  const { useGitHubAuth, useGoogleAuth } = useSocialAuth();
+  const { error: googleAuthError, mutate: googleAuthLoginMutate } = useGoogleAuth();
+  const { error: gitHubAuthError, mutate: gitHubAuthLoginMutate } = useGitHubAuth();
+
   const {
     formState: { errors },
     handleSubmit,
     register,
     setError,
-  } = useForm<FormInput>();
+  } = useForm<FormInput>({ mode: 'onBlur' });
 
-  const onSubmit = async ({ email, password }: FormInput) => {
-    const signInResponse = await signInFireBaseWithEmail(email, password);
-    if (typeof signInResponse === 'string') {
-      setError('root', { message: signInResponse });
-      alert(signInResponse);
-    }
+  const onSubmit = ({ email, password }: FormInput) => {
+    signInMutation.mutate({ email, password });
   };
 
   const handleClickSocialAuthButton = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    const socialLoginResponse = await socialLogin(event.currentTarget.name);
-    if (typeof socialLoginResponse === 'string') {
-      setError('root', { message: socialLoginResponse });
+    if (event.currentTarget.name === SOCIAL_SIGN_IN.GOOGLE) {
+      googleAuthLoginMutate();
+    }
+    if (event.currentTarget.name === SOCIAL_SIGN_IN.GITHUB) {
+      gitHubAuthLoginMutate();
     }
   };
+
+  useEffect(() => {
+    if (signInMutation.error) setError('root', { message: signInMutation.error.message });
+    if (gitHubAuthError) setError('root', { message: gitHubAuthError.message });
+    if (googleAuthError) setError('root', { message: googleAuthError.message });
+  }, [signInMutation.error, setError, gitHubAuthError, googleAuthError]);
 
   return (
     <Container>
@@ -66,7 +74,7 @@ const SignIn = () => {
         <span>계정이 없으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
       </AnotherLink>
-      <SocialLogin onClickSocialAuthButton={handleClickSocialAuthButton} />
+      <SocialLogIn onClickSocialAuthButton={handleClickSocialAuthButton} />
       <ErrorMessage>{errors.root?.message}</ErrorMessage>
     </Container>
   );

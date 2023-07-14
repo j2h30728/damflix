@@ -29,6 +29,7 @@ const Input = styled.input`
 `;
 
 export const ErrorMessage = styled.p`
+  width: 400px;
   color: red;
   height: 10px;
   font-size: 15px;

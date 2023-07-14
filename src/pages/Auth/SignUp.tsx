@@ -1,18 +1,22 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { FormInput } from '../../components';
 import { ErrorMessage } from '../../components/auth/FormInput';
-import SocialLogin from '../../components/auth/SocialLogin';
-import useAuth from '../../hooks/auth/useAuth';
-import useSocialAuth from '../../hooks/auth/useSocialAuth';
+import SocialLogIn from '../../components/auth/SocialLogIn';
+import { SOCIAL_SIGN_IN } from '../../constants/auth';
+import { useSignUp, useSocialAuth } from '../../hooks';
 import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { AnotherLink, Container, Form, FormButton, Navigator, Title } from './auth.styled';
 
 type FormInput = Record<'email' | 'password' | 'passwordConform', string>;
 
 const SignUp = () => {
-  const socialLogin = useSocialAuth();
-  const { signUpFireBasWitheEmail } = useAuth();
+  const signUpMutation = useSignUp();
+  const { useGitHubAuth, useGoogleAuth } = useSocialAuth();
+  const { error: googleAuthError, mutate: googleAuthLoginMutate } = useGoogleAuth();
+  const { error: gitHubAuthError, mutate: gitHubAuthLoginMutate } = useGitHubAuth();
+
   const {
     formState: { errors },
     handleSubmit,
@@ -20,24 +24,26 @@ const SignUp = () => {
     setError,
   } = useForm<FormInput>();
 
-  const onSubmit = async ({ email, password, passwordConform }: FormInput) => {
+  const onSubmit = ({ email, password, passwordConform }: FormInput) => {
     if (password !== passwordConform) {
       return setError('passwordConform', { message: '동일한 비밀번호를 입력해주세요.' });
     }
-    const signUpResponse = await signUpFireBasWitheEmail(email, password);
-    if (typeof signUpResponse === 'string') {
-      setError('root', { message: signUpResponse });
-      alert(signUpResponse);
-    } else {
-      alert('회원가입 축하드립니다.');
-    }
+    signUpMutation.mutate({ email, password });
   };
   const handleClickSocialAuthButton = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    const socialLoginResponse = await socialLogin(event.currentTarget.name);
-    if (typeof socialLoginResponse === 'string') {
-      setError('root', { message: socialLoginResponse });
+    if (event.currentTarget.name === SOCIAL_SIGN_IN.GOOGLE) {
+      googleAuthLoginMutate();
+    }
+    if (event.currentTarget.name === SOCIAL_SIGN_IN.GITHUB) {
+      gitHubAuthLoginMutate();
     }
   };
+
+  useEffect(() => {
+    if (signUpMutation.error) setError('root', { message: signUpMutation.error.message });
+    if (gitHubAuthError) setError('root', { message: gitHubAuthError.message });
+    if (googleAuthError) setError('root', { message: googleAuthError.message });
+  }, [signUpMutation.error, setError, gitHubAuthError, googleAuthError]);
 
   return (
     <Container>
@@ -90,7 +96,7 @@ const SignUp = () => {
         <span>계정이 있으신가요?</span>
         <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>
       </AnotherLink>
-      <SocialLogin onClickSocialAuthButton={handleClickSocialAuthButton} />
+      <SocialLogIn onClickSocialAuthButton={handleClickSocialAuthButton} />
       <ErrorMessage>{errors.root?.message}</ErrorMessage>
     </Container>
   );
