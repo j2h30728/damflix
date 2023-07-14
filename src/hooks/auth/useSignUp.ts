@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import ROUTE_PATH from '../../constants/route';
 import { useMutationSignUpWithEmail } from '../../queries/auth';
-import ROUTE_PATH from '../../router/ROUTE_PATH';
 
 const useSignUp = () => {
   const navigate = useNavigate();

@@ -5,8 +5,8 @@ import { FormInput } from '../../components';
 import { ErrorMessage } from '../../components/auth/FormInput';
 import SocialLogIn from '../../components/auth/SocialLogIn';
 import { SOCIAL_SIGN_IN } from '../../constants/auth';
+import ROUTE_PATH from '../../constants/route';
 import { useSignIn, useSocialAuth } from '../../hooks';
-import ROUTE_PATH from '../../router/ROUTE_PATH';
 import { AnotherLink, Container, Form, FormButton, Navigator, Title } from './auth.styled';
 
 type FormInput = Record<'email' | 'password', string>;

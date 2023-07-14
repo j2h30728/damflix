@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import ROUTE_PATH from '../constants/route';
 import { AuthContext } from '../contexts/AuthContext';
 import { DarkModeContext } from '../contexts/DarkModeContext';
-import ROUTE_PATH from '../router/ROUTE_PATH';
 import { MovieListType } from '../types/movies';
 import scrollTolTop from '../utils/scrollTolTop';
 
