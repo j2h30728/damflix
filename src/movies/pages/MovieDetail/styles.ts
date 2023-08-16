@@ -20,12 +20,11 @@ export const MovieContents = styled.div`
   overflow: auto;
 `;
 
-export const MovieDetailImage = styled.div<{ imagePath?: string }>`
+export const MovieDetailImage = styled.img`
   width: 100%;
-  height: 50%;
-  background-image: url(${props => props.imagePath});
-  background-size: cover;
-  background-position: center center;
+  height: 60%;
+  object-fit: cover;
+  object-position: center center;
 `;
 
 export const MovieDetailTitle = styled.h2`

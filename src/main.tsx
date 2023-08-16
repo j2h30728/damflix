@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import { DarkModeContextProvider } from './contexts/DarkModeContext.tsx';
 import './index.css';
 import router from './router/index.tsx';
 import queryClient from './utils/queryClient.ts';
@@ -12,9 +11,7 @@ import queryClient from './utils/queryClient.ts';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <DarkModeContextProvider>
-        <RouterProvider router={router} />
-      </DarkModeContextProvider>
+      <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
