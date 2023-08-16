@@ -17,9 +17,7 @@ const MovieDetail = () => {
     <Modal layoutId={`${listType}${movieDetailData?.id}`} onClose={handleCloseModal}>
       <MovieWrapper>
         <ModalCloseButton onClick={handleCloseModal} />
-        <MovieDetailImage
-          imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
-        ></MovieDetailImage>
+        <MovieDetailImage src={makeImagePath(movieDetailData?.backdrop_path, ImageFormat.ORIGINAL)}></MovieDetailImage>
         <MovieContents>
           <MovieDetailTitle>{movieDetailData?.original_title}</MovieDetailTitle>
           <span>{movieDetailData?.overview}</span>
