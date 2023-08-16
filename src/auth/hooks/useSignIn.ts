@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import { useMutationSignInWithEmail } from '../../queries/auth';
+import { AuthContext } from '../AuthContext';
+import { useMutationSignInWithEmail } from '../mutations';
 
 const useSignIn = () => {
   const { signIn } = useContext(AuthContext);

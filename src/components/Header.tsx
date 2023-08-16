@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { AuthContext } from '../auth/AuthContext';
 import ROUTE_PATH from '../constants/route';
-import { AuthContext } from '../contexts/AuthContext';
 import { DarkModeContext } from '../contexts/DarkModeContext';
-import { MovieListType } from '../types/movies';
+import { MovieListType } from '../movies/types';
 import scrollTolTop from '../utils/scrollTolTop';
 
 const Header = () => {

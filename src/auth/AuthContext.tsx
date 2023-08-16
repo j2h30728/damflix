@@ -1,7 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getTokenFromLocalStorage, removeTokenFromLocalStorage, setTokenFromLocalStorage } from '../utils/localStorage';
+import {
+  getTokenFromLocalStorage,
+  removeTokenFromLocalStorage,
+  setTokenFromLocalStorage,
+} from './tokenWithLocalStorage';
 
 interface AuthContextType {
   isLoggedIn: boolean;

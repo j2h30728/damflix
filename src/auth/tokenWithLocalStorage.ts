@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'accessToken';
+import { ACCESS_TOKEN } from './constants';
 
 export const getTokenFromLocalStorage = () => {
   return localStorage.getItem(ACCESS_TOKEN);

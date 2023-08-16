@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { AuthContextProvider } from './auth/AuthContext';
 import { Header, ScrollTopButton } from './components';
-import { AuthContextProvider } from './contexts/AuthContext';
 import { DarkModeContextProvider } from './contexts/DarkModeContext';
 import GlobalStyle from './styles/GlobalStyle';
 

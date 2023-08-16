@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
+import { SignIn, SignUp } from '../auth/pages';
 import ROUTE_PATH from '../constants/route';
-import { MovieList, SignIn, SignUp, movieDetailLoader, movieListLoader } from '../pages';
+import { MovieDetail, MovieList, movieDetailLoader, movieListLoader } from '../movies/pages';
 import ErrorPage from '../pages/ErrorPage';
-import MovieDetail from '../pages/MovieDetail';
 import queryClient from '../utils/queryClient';
 
 const router = createBrowserRouter([

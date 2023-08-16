@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SocialSignInButton, SocialSignInContainer } from '../../pages/Auth/auth.styled';
+import { SocialSignInButton, SocialSignInContainer } from '../pages/auth.styled';
 import { GitHubIcon, GoogleIcon } from './Icons';
 
 const SocialSignIn = ({
