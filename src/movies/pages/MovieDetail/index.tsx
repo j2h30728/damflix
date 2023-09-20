@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 
-import { Modal, XMarkIcon as ModalCloseButton } from '../../components';
-import useCloseModal from '../../hooks/useCloseModal';
-import { useQueryMovieDetailData } from '../../queries/movies';
-import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
+import { Modal, XMarkIcon as ModalCloseButton } from '../../../components';
+import useCloseModal from '../../../hooks/useCloseModal';
+import { ImageFormat, makeImagePath } from '../../../utils/makeImagePath';
+import { useQueryMovieDetailData } from '../../queries';
 import { MovieContents, MovieDetailImage, MovieDetailTitle, MovieWrapper } from './styles';
 
 const MovieDetail = () => {
@@ -17,9 +17,7 @@ const MovieDetail = () => {
     <Modal layoutId={`${listType}${movieDetailData?.id}`} onClose={handleCloseModal}>
       <MovieWrapper>
         <ModalCloseButton onClick={handleCloseModal} />
-        <MovieDetailImage
-          imagePath={makeImagePath(movieDetailData?.backdrop_path || '', ImageFormat.ORIGINAL)}
-        ></MovieDetailImage>
+        <MovieDetailImage src={makeImagePath(movieDetailData?.backdrop_path, ImageFormat.ORIGINAL)}></MovieDetailImage>
         <MovieContents>
           <MovieDetailTitle>{movieDetailData?.original_title}</MovieDetailTitle>
           <span>{movieDetailData?.overview}</span>

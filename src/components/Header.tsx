@@ -3,17 +3,24 @@ import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { AuthContext } from '../auth/AuthContext';
+import ROUTE_PATH from '../constants/route';
 import { DarkModeContext } from '../contexts/DarkModeContext';
-import ROUTE_PATH from '../router/ROUTE_PATH';
-import { MovieListType } from '../types/movies';
+import { MovieListType } from '../movies/types';
 import scrollTolTop from '../utils/scrollTolTop';
 
 const Header = () => {
   const { handleChangeDarkMode, isDark } = useContext(DarkModeContext);
+  const { isLoggedIn, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    if (confirm('로그아웃 하시겠습니까?')) {
+      logOut();
+    }
+  };
   const { pathname } = useLocation();
-  const isPopularType = pathname.slice(1) === MovieListType.POPULAR;
+  const isPopularType = pathname.slice(1) === MovieListType.POPULAR || pathname.slice(1, 6) === 'movie';
   const isUpcomingType = pathname.includes(MovieListType.UPCOMING);
-  const isNowPlayingType = pathname.includes(MovieListType.NOW_PLAYING);
+  const isNowPlayingType = pathname.match(MovieListType.NOW_PLAYING);
 
   const NavigatorData = [
     { condition: isPopularType, navigate: MovieListType.POPULAR, text: 'POPULAR' },
@@ -23,18 +30,25 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo>DAMFLIX</Logo>
+      <Logo to={`/`}>DAMFLIX</Logo>
       <LinkContainer>
         {NavigatorData.map(navigator => (
           <LinkAndCircle key={navigator.navigate} onClick={scrollTolTop}>
-            <Link state={navigator.condition} to={navigator.navigate}>
+            <Navigator state={navigator.condition} to={navigator.navigate}>
               {navigator.text}
-            </Link>
+            </Navigator>
             {navigator.condition && <Circle layoutId="link" />}
           </LinkAndCircle>
         ))}
       </LinkContainer>
-      <Link to={`/${ROUTE_PATH.LOG_IN}`}>로그인/회원가입</Link>
+      {isLoggedIn ? (
+        <LogOutButton onClick={handleLogout}>로그아웃</LogOutButton>
+      ) : (
+        <div>
+          <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>/
+          <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
+        </div>
+      )}
       <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>
     </HeaderContainer>
   );
@@ -55,13 +69,22 @@ const HeaderContainer = styled.div`
   height: 85px;
   background-color: ${props => props.theme.color.secondary};
 `;
-const Logo = styled.div`
+const Logo = styled(Link)`
   color: ${props => props.theme.color.point};
   font-size: 40px;
   font-family: 'EF_jejudoldam';
   letter-spacing: -5px;
   text-shadow: -2px -2px 0 ${props => props.theme.color.primary}, 2px -2px 0 ${props => props.theme.color.primary},
     -2px 2px 0 ${props => props.theme.color.primary}, 2px 2px 0 ${props => props.theme.color.primary};
+`;
+
+const Navigator = styled(Link)`
+  :hover {
+    color: ${props => props.theme.color.point};
+  }
+  :active {
+    color: ${props => props.theme.color.neutral};
+  }
 `;
 
 const DarkModeButton = styled.button`
@@ -105,3 +128,4 @@ const LinkAndCircle = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+const LogOutButton = styled.div``;

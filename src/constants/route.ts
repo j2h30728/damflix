@@ -1,9 +1,9 @@
 const ROUTE_PATH = {
-  CREATE_ACCOUNT: 'create-account',
   LIST_TYPE: ':listType?',
-  LOG_IN: 'log-in',
   MOVIE_DETAIL_PAGE: 'movie/:movieId',
   ROOT: '/',
+  SIGN_IN: 'sign-in',
+  SIGN_UP: 'sign-up',
 } as const;
 
 export default ROUTE_PATH;

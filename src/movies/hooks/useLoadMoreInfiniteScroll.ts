@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { useQueryMoviesData } from '../queries/movies';
+import { useQueryMoviesData } from '../queries';
 
 const useLoadMoreInfiniteScroll = (listType: string | undefined) => {
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } = useQueryMoviesData(listType);

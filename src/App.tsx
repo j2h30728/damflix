@@ -1,24 +1,23 @@
-import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
+import { AuthContextProvider } from './auth/AuthContext';
 import { Header, ScrollTopButton } from './components';
-import { DarkModeContext } from './contexts/DarkModeContext';
+import { DarkModeContextProvider } from './contexts/DarkModeContext';
 import GlobalStyle from './styles/GlobalStyle';
-import { darkTheme, lightTheme } from './styles/theme';
 
 function App() {
-  const { isDark } = useContext(DarkModeContext);
-
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <GlobalStyle />
-      <Layout>
-        <Header />
-        <Outlet />
-        <ScrollTopButton />
-      </Layout>
-    </ThemeProvider>
+    <DarkModeContextProvider>
+      <AuthContextProvider>
+        <GlobalStyle />
+        <Layout>
+          <Header />
+          <Outlet />
+          <ScrollTopButton />
+        </Layout>
+      </AuthContextProvider>
+    </DarkModeContextProvider>
   );
 }
 
