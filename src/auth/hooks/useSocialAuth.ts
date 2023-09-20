@@ -1,10 +1,8 @@
-import { useContext } from 'react';
-
-import { AuthContext } from '../AuthContext';
 import { useGitHubAuthSignInWithPopup, useGoogleAuthSignInWithPopup } from '../mutations';
+import useUser from './useUser';
 
 const useSocialAuth = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useUser();
 
   const useGoogleAuth = () =>
     useGoogleAuthSignInWithPopup({
