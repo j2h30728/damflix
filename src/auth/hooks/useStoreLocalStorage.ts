@@ -12,7 +12,8 @@ const useStoreLocalStorage = (key: string) => {
     return localStorage.getItem(key);
   };
   const setValueInLocalStorage = (value: string) => {
-    return localStorage.setItem(key, value);
+    localStorage.setItem(key, value);
+    window.dispatchEvent(new StorageEvent('storage'));
   };
 
   const deleteValueInLocalStorage = () => {

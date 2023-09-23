@@ -1,23 +1,22 @@
-import { ReactNode, useContext } from 'react';
+import { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Header, ScrollTopButton } from '.';
-import { DarkModeContext, DarkModeContextProvider } from '../contexts/DarkModeContext';
+import useDarkMode, { DARK_MODE } from '../hooks/useDarkMode';
 import GlobalStyle from '../styles/GlobalStyle';
 import { darkTheme, lightTheme } from '../styles/theme';
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  const { isDark } = useContext(DarkModeContext);
+  const { localStorageValue: currentThemeMode } = useDarkMode();
+  const isDarkMode = currentThemeMode === DARK_MODE.DARK;
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <DarkModeContextProvider>
-        <GlobalStyle />
-        <Wrapper>
-          <Header />
-          {children}
-          <ScrollTopButton />
-        </Wrapper>
-      </DarkModeContextProvider>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Wrapper>
+        <Header />
+        {children}
+        <ScrollTopButton />
+      </Wrapper>
     </ThemeProvider>
   );
 };

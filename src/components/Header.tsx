@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion';
-import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import useUser from '../auth/hooks/useUser';
 import ROUTE_PATH from '../constants/route';
-import { DarkModeContext } from '../contexts/DarkModeContext';
+import useDarkMode, { DARK_MODE } from '../hooks/useDarkMode';
 import { MovieListType } from '../movies/types';
 import scrollTolTop from '../utils/scrollTolTop';
 
 const Header = () => {
-  const { handleChangeDarkMode, isDark } = useContext(DarkModeContext);
+  const { handleToggleDarkMode, localStorageValue: currentThemeMode } = useDarkMode();
+
   const { isLoggedIn, logOut } = useUser();
   const handleLogout = () => {
     if (confirm('로그아웃 하시겠습니까?')) {
@@ -49,7 +49,9 @@ const Header = () => {
           <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
         </div>
       )}
-      <DarkModeButton onClick={handleChangeDarkMode}>{isDark ? 'DARK' : 'LIGHT'}</DarkModeButton>
+      <DarkModeButton onClick={handleToggleDarkMode}>
+        {currentThemeMode === DARK_MODE.DARK ? DARK_MODE.LIGHT : DARK_MODE.DARK}
+      </DarkModeButton>
     </HeaderContainer>
   );
 };
