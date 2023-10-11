@@ -11,5 +11,4 @@ const apiClient = axios.create({
     accept: 'application/json',
   },
 });
-
 export default apiClient;

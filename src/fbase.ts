@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-
 import { initializeApp } from 'firebase/app';
 import { GithubAuthProvider, GoogleAuthProvider, getAuth } from 'firebase/auth';
 
@@ -24,13 +23,9 @@ const firebaseConfig = {
   projectId: VITE_FIREBASE_PROJECT_ID,
   storageBucket: VITE_FIREBASE_STORAGE_BUCKET,
 };
-
 // Initialize Firebase
 initializeApp(firebaseConfig);
-
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth();
-
 export const googleAuthProvider = new GoogleAuthProvider();
-
 export const gitHubAuthProvider = new GithubAuthProvider();
