@@ -1,7 +1,7 @@
 import { SVGAttributes } from 'react';
 import styled from 'styled-components';
 
-import scrollTolTop from '../utils/scrollTolTop';
+import scrollTolTop from '../../utils/scrollTolTop';
 import { Svg } from './Icons';
 
 const ScrollTopButton = (props: SVGAttributes<SVGElement>) => {

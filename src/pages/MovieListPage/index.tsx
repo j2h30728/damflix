@@ -1,8 +1,8 @@
 import { Outlet, useParams } from 'react-router-dom';
 
-import { Spinner } from '../../../components';
-import { ImageFormat, makeImagePath } from '../../../utils/makeImagePath';
-import useLoadMoreInfiniteScroll from '../../hooks/useLoadMoreInfiniteScroll';
+import { Spinner } from '../../components';
+import useLoadMoreInfiniteScroll from '../../hooks/movie/useLoadMoreInfiniteScroll';
+import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { FetchingNextPage, MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {

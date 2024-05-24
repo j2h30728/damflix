@@ -1,9 +1,9 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { getMovieListFetcher } from '../api/movies';
-import { getQueryKey as getMovieDetailQueryKey } from './pages/MovieDetail/loader';
-import { getQueryKey as getMovieListQueryKey } from './pages/MovieList/loader';
-import { Genres, GetMovieDetailResponseData, GetMoviesResponseData } from './types';
+import { getMovieListFetcher } from '../../api/movie';
+import { getQueryKey as getMovieDetailQueryKey } from '../../pages/MovieDetailPage/loader';
+import { getQueryKey as getMovieListQueryKey } from '../../pages/MovieListPage/loader';
+import { Genres, GetMovieDetailResponseData, GetMoviesResponseData } from '../../types/movie';
 
 type KeyOfMovieListType = 'coming-soon' | 'now-playing' | 'popular';
 

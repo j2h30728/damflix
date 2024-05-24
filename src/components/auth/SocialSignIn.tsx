@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SocialSignInButton, SocialSignInContainer } from '../pages/auth.styled';
-import { GitHubIcon, GoogleIcon } from './Icons';
+import { SocialSignInButton, SocialSignInContainer } from '../../styles/auth.styled';
+import { GitHubIcon, GoogleIcon } from '../ui/Icons';
 
 const SocialSignIn = ({
   onClickSocialAuthButton,

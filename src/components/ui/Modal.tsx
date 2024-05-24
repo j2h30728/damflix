@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-import useLockBodyScroll from '../hooks/useLockBodyScroll';
+import useLockBodyScroll from '../../hooks/useLockBodyScroll';
 
 interface ModalProps {
   children: React.ReactNode;

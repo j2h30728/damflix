@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import useUser from '../auth/hooks/useUser';
-import ROUTE_PATH from '../constants/route';
-import useDarkMode, { DARK_MODE } from '../hooks/useDarkMode';
-import { MovieListType } from '../movies/types';
-import scrollTolTop from '../utils/scrollTolTop';
+import ROUTE_PATH from '../../constants/route';
+import useUser from '../../hooks/auth/useUser';
+import useDarkMode, { DARK_MODE } from '../../hooks/useDarkMode';
+import { MovieListType } from '../../types/movie';
+import scrollTolTop from '../../utils/scrollTolTop';
 
 const Header = () => {
   const { handleToggleDarkMode, localStorageValue: currentThemeMode } = useDarkMode();
@@ -42,12 +42,14 @@ const Header = () => {
         ))}
       </LinkContainer>
       {isLoggedIn ? (
-        <LogOutButton onClick={handleLogout}>로그아웃</LogOutButton>
+        <Navigator as="button" onClick={handleLogout}>
+          로그아웃
+        </Navigator>
       ) : (
-        <div>
+        <>
           <Navigator to={`/${ROUTE_PATH.SIGN_IN}`}>로그인</Navigator>/
           <Navigator to={`/${ROUTE_PATH.SIGN_UP}`}>회원가입</Navigator>
-        </div>
+        </>
       )}
       <DarkModeButton onClick={handleToggleDarkMode}>
         {currentThemeMode === DARK_MODE.DARK ? DARK_MODE.LIGHT : DARK_MODE.DARK}
@@ -81,6 +83,8 @@ const Logo = styled(Link)`
 `;
 
 const Navigator = styled(Link)`
+  cursor: pointer;
+  color: ${props => props.theme.color.text};
   :hover {
     color: ${props => props.theme.color.point};
   }
@@ -130,4 +134,3 @@ const LinkAndCircle = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
-const LogOutButton = styled.div``;

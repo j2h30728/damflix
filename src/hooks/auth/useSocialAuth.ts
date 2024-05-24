@@ -1,4 +1,4 @@
-import { useGitHubAuthSignInWithPopup, useGoogleAuthSignInWithPopup } from '../mutations';
+import { useGitHubAuthSignInWithPopup, useGoogleAuthSignInWithPopup } from './mutations';
 import useUser from './useUser';
 
 const useSocialAuth = () => {

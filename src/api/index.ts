@@ -10,5 +10,6 @@ const apiClient = axios.create({
     Authorization: `Bearer ${VITE_API_KEY}`,
     accept: 'application/json',
   },
+  timeout: 1000 * 5,
 });
 export default apiClient;

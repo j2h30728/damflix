@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import { ACCESS_TOKEN } from '../../constants/auth';
 import ROUTE_PATH from '../../constants/route';
-import { ACCESS_TOKEN } from '../constants';
 import useStoreLocalStorage from './useStoreLocalStorage';
 
 const useUser = () => {

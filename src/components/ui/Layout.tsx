@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { Header, ScrollTopButton } from '.';
-import useDarkMode, { DARK_MODE } from '../hooks/useDarkMode';
-import GlobalStyle from '../styles/GlobalStyle';
-import { darkTheme, lightTheme } from '../styles/theme';
+import { Header, ScrollTopButton } from '..';
+import useDarkMode, { DARK_MODE } from '../../hooks/useDarkMode';
+import GlobalStyle from '../../styles/GlobalStyle';
+import { darkTheme, lightTheme } from '../../styles/theme';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { localStorageValue: currentThemeMode } = useDarkMode();

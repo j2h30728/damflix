@@ -1,4 +1,4 @@
-import useStoreLocalStorage from '../auth/hooks/useStoreLocalStorage';
+import useStoreLocalStorage from './auth/useStoreLocalStorage';
 
 export const DARK_MODE = {
   DARK: 'DARK',

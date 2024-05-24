@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { FormInput, SocialSignIn } from '../../components/auth';
+import { ErrorMessage } from '../../components/auth/FormInput';
+import { SOCIAL_SIGN_IN } from '../../constants/auth';
 import ROUTE_PATH from '../../constants/route';
-import { FormInput, SocialSignIn } from '../components';
-import { ErrorMessage } from '../components/FormInput';
-import { SOCIAL_SIGN_IN } from '../constants';
-import { useSignUp, useSocialAuth } from '../hooks';
-import { AnotherLink, Container, Form, FormButton, Navigator, Title } from './auth.styled';
+import useSignUp from '../../hooks/auth/useSignUp';
+import useSocialAuth from '../../hooks/auth/useSocialAuth';
+import { AnotherLink, Container, Form, FormButton, Navigator, Title } from '../../styles/auth.styled';
 
 type FormInput = Record<'email' | 'password' | 'passwordConform', string>;
 

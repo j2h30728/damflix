@@ -4,7 +4,7 @@ import type { AuthError, UserCredential } from 'firebase/auth';
 import { useMutation } from '@tanstack/react-query';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
-import { auth, gitHubAuthProvider, googleAuthProvider } from '../fbase';
+import { auth, gitHubAuthProvider, googleAuthProvider } from '../../fbase';
 
 export const useMutationSignUpWithEmail = (
   useMutationOptions: UseMutationOptions<UserCredential, AuthError, { email: string; password: string }>

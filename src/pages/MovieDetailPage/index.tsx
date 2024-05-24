@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 
-import { Modal, XMarkIcon as ModalCloseButton } from '../../../components';
-import useCloseModal from '../../../hooks/useCloseModal';
-import { ImageFormat, makeImagePath } from '../../../utils/makeImagePath';
-import { useQueryMovieDetailData } from '../../queries';
+import { Modal } from '../../components';
+import { XMarkIcon as ModalCloseButton } from '../../components/ui/Icons';
+import { useQueryMovieDetailData } from '../../hooks/movie/queries';
+import useCloseModal from '../../hooks/useCloseModal';
+import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
 import { MovieContents, MovieDetailImage, MovieDetailTitle, MovieWrapper } from './styles';
 
 const MovieDetail = () => {

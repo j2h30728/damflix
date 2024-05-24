@@ -1,4 +1,4 @@
-import { useMutationSignInWithEmail } from '../mutations';
+import { useMutationSignInWithEmail } from './mutations';
 import useUser from './useUser';
 
 const useSignIn = () => {

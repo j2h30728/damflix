@@ -1,7 +1,7 @@
 import type { QueryKey } from '@tanstack/react-query';
 
 import apiClient, { BASE_URL } from '.';
-import { GetMoviesResponseData } from '../movies/types';
+import { GetMoviesResponseData } from '../types/movie';
 
 export const getMovieListFetcher = async ({
   pageParam,

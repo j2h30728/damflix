@@ -3,8 +3,8 @@ import type { LoaderFunctionArgs } from 'react-router-dom';
 
 import { QueryClient } from '@tanstack/react-query';
 
-import { getMovieListFetcher } from '../../../api/movies';
-import { GetMoviesResponseData } from '../../types';
+import { getMovieListFetcher } from '../../api/movie';
+import { GetMoviesResponseData } from '../../types/movie';
 
 export enum MovieListTypeQueryKey {
   'coming-soon' = 'upcoming',
