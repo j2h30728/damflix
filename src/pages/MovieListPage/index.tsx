@@ -3,14 +3,14 @@ import { Outlet, useParams } from 'react-router-dom';
 import { Spinner } from '../../components';
 import useLoadMoreInfiniteScroll from '../../hooks/movie/useLoadMoreInfiniteScroll';
 import { ImageFormat, makeImagePath } from '../../utils/makeImagePath';
-import { FetchingNextPage, MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
+import { FetchingNextPage, ListContainer, MovieContainer, MovieImage, MovieTitle, MoviesWrapper } from './styles';
 
 const MovieList = () => {
   const { listType } = useParams();
   const { hasNextPage, isFetching, isFetchingNextPage, movieListData, ref } = useLoadMoreInfiniteScroll(listType);
 
   return (
-    <>
+    <ListContainer>
       <MoviesWrapper animate="visible" initial="hidden" key={listType} variants={containerVariants}>
         {movieListData?.map(movie => (
           <MovieContainer
@@ -18,12 +18,9 @@ const MovieList = () => {
             layoutId={`${listType}${movie.id}`}
             to={`movie/${movie.id}`}
             variants={itemVariants}
+            whileHover="hover"
           >
-            <MovieImage
-              imagePath={makeImagePath(movie.poster_path, ImageFormat.W500)}
-              variants={imageVariants}
-              whileHover="hover"
-            ></MovieImage>
+            <MovieImage imagePath={makeImagePath(movie.poster_path, ImageFormat.W300)} whileHover="hover"></MovieImage>
             <MovieTitle>{movie.title}</MovieTitle>
           </MovieContainer>
         ))}
@@ -32,7 +29,7 @@ const MovieList = () => {
         {isFetching && isFetchingNextPage && hasNextPage ? <Spinner size={50} /> : null}
       </FetchingNextPage>
       <Outlet />
-    </>
+    </ListContainer>
   );
 };
 
@@ -51,17 +48,15 @@ const containerVariants = {
 };
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-};
-const imageVariants = {
   hover: {
     scale: 1.1,
     transition: {
       delay: 0.1,
       duration: 0.2,
     },
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
   },
 };

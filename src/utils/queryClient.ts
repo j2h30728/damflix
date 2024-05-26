@@ -13,6 +13,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       queryFn: defaultQueryFn,
+      refetchOnWindowFocus: false,
       staleTime: 1000 * 60 * 60,
     },
   },

@@ -4,23 +4,25 @@ import styled from 'styled-components';
 
 export const MoviesWrapper = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  padding: 0 20px;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  place-items: center;
 `;
 
 export const MovieContainer = styled(motion(Link))`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 50px;
   justify-content: center;
   align-items: center;
-  width: 380px;
+  width: 220px;
 `;
 
 export const MovieImage = styled(motion.div)<{ imagePath?: string }>`
-  width: 290px;
-  height: 390px;
+  width: 100%;
+  height: 300px;
   border-radius: 5px;
   background-image: url(${props => props.imagePath});
   background-size: cover;
@@ -35,4 +37,8 @@ export const MovieTitle = styled.h3`
 
 export const FetchingNextPage = styled.div`
   margin: 20px 0;
+`;
+
+export const ListContainer = styled.div`
+  width: 100vw;
 `;
